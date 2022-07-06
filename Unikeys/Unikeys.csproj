@@ -5,10 +5,59 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+      <PackageReference Include="SharpVectors" Version="1.7.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Resource Include="Fonts\*.ttf" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Icons\lock-black.svg" />
+        <Content Include="Icons\lock-black.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\info-black.svg" />
+        <Content Include="Icons\info-black.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\lock-open-black.svg" />
+        <Content Include="Icons\lock-open-black.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\help-black.svg" />
+        <Content Include="Icons\help-black.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\key-black.svg" />
+        <Content Include="Icons\key-black.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\file-search-black.svg" />
+        <Content Include="Icons\file-search-black.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\alert-triangle-black.svg" />
+        <Content Include="Icons\alert-triangle-black.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\settings-black.svg" />
+        <Content Include="Icons\settings-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\alert-octogon-black.svg" />
+        <Content Include="Icons\alert-octogon-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\unikeys-logo.png" />
+        <Content Include="Icons\unikeys-logo.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

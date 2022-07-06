@@ -8,3 +8,5 @@ using System.Windows;
     //(used if a resource is not found in the page,
     // app, or any theme specific resource dictionaries)
 )]
+// The program will pull this version to display in the "About" tab
+// [assembly: AssemblyVersion("1.0.0.0")]
