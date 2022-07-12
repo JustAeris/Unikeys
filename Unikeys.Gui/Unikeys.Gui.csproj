@@ -58,6 +58,10 @@
         <Content Include="Icons\unikeys-logo.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <None Remove="Icons\circle-check-black.svg" />
+        <Content Include="Icons\circle-check-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

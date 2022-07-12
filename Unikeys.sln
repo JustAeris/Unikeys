@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikeys", "Unikeys\Unikeys.csproj", "{6FA32FF8-8B51-4BEC-9A3D-AE932BC3FDB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikeys.Gui", "Unikeys.Gui\Unikeys.Gui.csproj", "{6FA32FF8-8B51-4BEC-9A3D-AE932BC3FDB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

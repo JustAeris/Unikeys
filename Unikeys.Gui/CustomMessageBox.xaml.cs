@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Unikeys;
+namespace Unikeys.Gui;
 
 public partial class CustomMessageBox : Window
 {
@@ -26,6 +26,9 @@ public partial class CustomMessageBox : Window
             case CustomMessageBoxIcons.Warning:
                 IconSvgViewbox.Source = new Uri("Icons/alert-triangle-black.svg", UriKind.Relative);
                 break;
+            case CustomMessageBoxIcons.Success:
+                IconSvgViewbox.Source = new Uri("Icons/circle-check-black.svg", UriKind.Relative);
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(icon), icon, null);
         }
@@ -38,6 +41,7 @@ public partial class CustomMessageBox : Window
         Error,
         Info,
         Question,
-        Warning
+        Warning,
+        Success
     }
 }

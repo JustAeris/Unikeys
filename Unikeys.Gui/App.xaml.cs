@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Unikeys
+namespace Unikeys.Gui
 {
     /// <summary>
     /// Interaction logic for App.xaml

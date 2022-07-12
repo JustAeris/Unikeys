@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="Unikeys.MainWindow"
+    x:Class="Unikeys.Gui.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -60,10 +60,12 @@
                         Choose a file to encrypt
                     </Label>
                     <Button
+                        x:Name="ChooseFileEncryptionButton"
                         Grid.Row="2"
                         Grid.Column="1"
                         Margin="0,0,0,10"
-                        HorizontalAlignment="Stretch">
+                        HorizontalAlignment="Stretch"
+                        Click="ChooseFileEncryptionButton_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <svgc:SvgViewbox MaxHeight="15" Source="Icons/file-search-black.svg"/>
                             <Label>
@@ -72,6 +74,7 @@
                         </StackPanel>
                     </Button>
                     <TextBox
+                        x:Name="FilePathEncryptionTextBox"
                         Grid.Row="3"
                         Grid.Column="1"
                         IsReadOnly="True"/>
@@ -83,20 +86,28 @@
                         <Label VerticalAlignment="Center">
                             Input a password (optional)
                         </Label>
-                        <Button Background="White">
+                        <Button
+                            x:Name="HelpButton"
+                            Background="White"
+                            Click="HelpButton_OnClick">
                             <svgc:SvgViewbox
                                 MaxHeight="15"
                                 Margin="-6,-5"
                                 Source="Icons/help-black.svg"/>
                         </Button>
                     </StackPanel>
-                    <PasswordBox Grid.Row="6" Grid.Column="1"/>
+                    <PasswordBox
+                        x:Name="PasswordBox"
+                        Grid.Row="6"
+                        Grid.Column="1"/>
 
                     <Button
+                        x:Name="EncryptButton"
                         Grid.Row="7"
                         Grid.Column="1"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Click="EncryptButton_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <svgc:SvgViewbox MaxHeight="15" Source="Icons/key-black.svg"/>
                             <Label>
@@ -138,10 +149,12 @@
                         Choose a file to decrypt
                     </Label>
                     <Button
+                        x:Name="ChooseFileDecryptionButton"
                         Grid.Row="2"
                         Grid.Column="1"
                         Margin="0,0,0,10"
-                        HorizontalAlignment="Stretch">
+                        HorizontalAlignment="Stretch"
+                        Click="ChooseFileDecryptionButton_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <svgc:SvgViewbox MaxHeight="15" Source="Icons/file-search-black.svg"/>
                             <Label>
@@ -150,6 +163,7 @@
                         </StackPanel>
                     </Button>
                     <TextBox
+                        x:Name="FilePathDecryptionTextBox"
                         Grid.Row="3"
                         Grid.Column="1"
                         IsReadOnly="True"/>
@@ -162,13 +176,18 @@
                             Input the decryption key/password
                         </Label>
                     </StackPanel>
-                    <PasswordBox Grid.Row="6" Grid.Column="1"/>
+                    <PasswordBox
+                        x:Name="KeyPasswordBox"
+                        Grid.Row="6"
+                        Grid.Column="1"/>
 
                     <Button
+                        x:Name="DecryptButton"
                         Grid.Row="7"
                         Grid.Column="1"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Click="DecryptButton_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <svgc:SvgViewbox MaxHeight="15" Source="Icons/key-black.svg"/>
                             <Label>
