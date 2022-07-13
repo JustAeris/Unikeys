@@ -64,4 +64,8 @@
         </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Unikeys.Core\Unikeys.Core.csproj" />
+    </ItemGroup>
+
 </Project>

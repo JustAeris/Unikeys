@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Windows;
 using Microsoft.Win32;
+using Unikeys.Core;
 using ModernWpf;
 
 namespace Unikeys.Gui
@@ -76,39 +75,6 @@ namespace Unikeys.Gui
                 return;
             }
 
-            var aes = Aes.Create();
-
-            // Derive a key from the password and a salt
-            var key = PasswordBox.Password == "" ?
-                Rfc2898DeriveBytes.Pbkdf2(aes.Key, aes.IV, 1069, HashAlgorithmName.SHA512, aes.KeySize / 8) :
-                Rfc2898DeriveBytes.Pbkdf2(PasswordBox.Password, aes.IV, 1069, HashAlgorithmName.SHA512, aes.KeySize / 8);
-            aes.Key = key;
-
-            byte[] result;
-
-            // Encrypt the file
-            LockEncryptionGui(true);
-            try
-            {
-                result = aes.EncryptCbc(File.ReadAllBytes(FilePathEncryptionTextBox.Text), aes.IV);
-            }
-            catch (Exception ex)
-            {
-                new CustomMessageBox("Oops...", "Something went wrong while encrypting the file!",
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
-                new CustomMessageBox("Error details:", ex.Message,
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
-                return;
-            }
-            finally
-            {
-                LockEncryptionGui(false);
-            }
-
-            // Add the IV to the result
-            Array.Resize(ref result, result.Length + aes.IV.Length);
-            Array.Copy(aes.IV, 0, result, result.Length - aes.IV.Length, aes.IV.Length);
-
             // Ask the user where to save the file
             var dialog = new SaveFileDialog
             {
@@ -116,6 +82,7 @@ namespace Unikeys.Gui
                 CheckPathExists = true,
                 OverwritePrompt = true,
                 AddExtension = true,
+                FileName = FilePathEncryptionTextBox.Text + ".unikeys",
                 Filter = "Unikeys file (*.unikeys)|*.unikeys"
             };
 
@@ -129,32 +96,33 @@ namespace Unikeys.Gui
                 return;
             }
 
-            // Save the encrypted file
+            var key = PasswordBox.Password;
             LockEncryptionGui(true);
             try
             {
-                File.WriteAllBytes(FilePathEncryptionTextBox.Text + ".unikeys", result);
+                key = EncryptDecrypt.EncryptFile(FilePathEncryptionTextBox.Text, dialog.FileName, PasswordBox.Password);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                new CustomMessageBox("Oops...", "Something went wrong while saving the file!",
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
-                new CustomMessageBox("Error details:", ex.Message,
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
-                return;
+                new CustomMessageBox(
+                    "Oops...", "Something went wrong during encryption", CustomMessageBox.CustomMessageBoxIcons.Error,
+                    exception).Show();
             }
             finally
             {
                 LockEncryptionGui(false);
-                Array.Clear(result);
             }
 
             // Display a message box to confirm the encryption
-            if (PasswordBox.Password == "")
-                new UniqueKeyDisplayWindow(Convert.ToBase64String(key)).Show();
+            if (PasswordBox.Password != key)
+                new UniqueKeyDisplayWindow(key).Show();
             else
                 new CustomMessageBox("Success!", "The file has been encrypted successfully!",
                     CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+
+            // Clear the text boxes
+            FilePathEncryptionTextBox.Text = "";
+            PasswordBox.Password = "";
         }
 
         /// <summary>
@@ -216,56 +184,6 @@ namespace Unikeys.Gui
                 return;
             }
 
-            // Check if the file already exists
-            if (File.Exists(FilePathDecryptionTextBox.Text.Replace(".unikeys", "") ))
-            {
-                new CustomMessageBox("Oops...", "The file already exists!",
-                    CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
-                return;
-            }
-
-            // Get the last 16 bytes of fileBytes to get the IV
-            var fileBytes = File.ReadAllBytes(FilePathDecryptionTextBox.Text);
-            var iv = new byte[16];
-            Array.Copy(fileBytes, fileBytes.Length - 16, iv, 0, 16);
-
-            var aes = Aes.Create();
-
-            var tryBase64 = Array.Empty<byte>();
-            try
-            {
-                tryBase64 = Convert.FromBase64String(KeyPasswordBox.Password);
-            }
-            catch
-            {
-                // Ignored ; I use a try/catch here because TryFromBase64String is janky and doesn't work
-            }
-
-            var key = tryBase64.Length == 32 ? tryBase64.ToArray() : Rfc2898DeriveBytes.Pbkdf2(KeyPasswordBox.Password, iv, 1069, HashAlgorithmName.SHA512, aes.KeySize / 8);
-
-            aes.Key = key;
-            aes.IV = iv;
-
-            // Decrypt the fileBytes except the last 16 bytes (IV)
-            byte[] result;
-            LockDecryptionGui(true);
-            try
-            {
-                result = aes.DecryptCbc(fileBytes.Take(fileBytes.Length - 16).ToArray(), iv);
-            }
-            catch (Exception ex)
-            {
-                new CustomMessageBox("Oops...", "Something went wrong while decrypting the file! Maybe a wrong password?",
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
-                new CustomMessageBox("Error details:", ex.Message,
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
-                return;
-            }
-            finally
-            {
-                LockDecryptionGui(false);
-            }
-
             // Ask the user where to save the file
             var dialog = new SaveFileDialog
             {
@@ -287,26 +205,28 @@ namespace Unikeys.Gui
                 return;
             }
 
-            // Write the result to a file
+            LockDecryptionGui(true);
             try
             {
-                File.WriteAllBytes(dialog.FileName.Replace(".unikeys", ""), result);
+                EncryptDecrypt.DecryptFile(FilePathDecryptionTextBox.Text, dialog.FileName, KeyPasswordBox.Password);
             }
             catch (Exception ex)
             {
-                new CustomMessageBox("Oops...", "Something went wrong while saving the file!",
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
-                new CustomMessageBox("Error details:", ex.Message,
-                    CustomMessageBox.CustomMessageBoxIcons.Error).Show();
+                new CustomMessageBox("Oops...", "Something went wrong while decrypting the file! Maybe a wrong password?",
+                    CustomMessageBox.CustomMessageBoxIcons.Error, ex).Show();
                 return;
             }
             finally
             {
-                Array.Clear(result);
+                LockDecryptionGui(false);
             }
 
             new CustomMessageBox("Success!", "File decrypted successfully!",
                 CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+
+            // Clear the text boxes
+            FilePathDecryptionTextBox.Text = "";
+            KeyPasswordBox.Password = "";
         }
 
         /// <summary>
