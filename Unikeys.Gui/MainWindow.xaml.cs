@@ -137,7 +137,7 @@ namespace Unikeys.Gui
         }
 
         /// <summary>
-        /// Allows the user to choose a file to decrypt
+        /// Allows the user to choose a unikeys file to decrypt
         /// </summary>
         private void ChooseFileDecryptionButton_OnClick(object sender, RoutedEventArgs e)
         {
@@ -147,7 +147,7 @@ namespace Unikeys.Gui
                 CheckFileExists = true,
                 CheckPathExists = true,
                 Multiselect = false,
-                Filter = "All files (*.*)|*.*"
+                Filter = "Unikeys files (*.unikeys)|*.unikeys"
             };
 
             dialog.ShowDialog();
