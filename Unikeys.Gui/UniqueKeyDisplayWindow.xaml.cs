@@ -14,6 +14,7 @@ public partial class UniqueKeyDisplayWindow
     {
         InitializeComponent();
         UniqueKeyBox.Text = keyToDisplay;
+        UniqueKeyBox.Focus();
         ButtonTimer();
     }
 
