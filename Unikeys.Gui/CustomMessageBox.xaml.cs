@@ -1,11 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Unikeys.Gui;
 
 public partial class CustomMessageBox : Window
 {
-    public CustomMessageBox(string title, string message, CustomMessageBoxIcons icon)
+    private readonly Exception? _exception;
+
+    public CustomMessageBox(string title, string message, CustomMessageBoxIcons icon, Exception? exception = null)
     {
         InitializeComponent();
         Title = title;
@@ -32,6 +39,10 @@ public partial class CustomMessageBox : Window
             default:
                 throw new ArgumentOutOfRangeException(nameof(icon), icon, null);
         }
+
+        if (exception == null) return;
+        ReportButton.Visibility = Visibility.Visible;
+        _exception = exception;
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e) => Close();
@@ -43,5 +54,21 @@ public partial class CustomMessageBox : Window
         Question,
         Warning,
         Success
+    }
+
+    private void ReportButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var s = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+        s = Path.GetInvalidPathChars().Concat(new[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|' }).Aggregate(s, (current, c) => current.Replace(c, '-'));
+
+        try
+        {
+            File.WriteAllText(
+                string.Join("", s) + " - error.log", _exception?.ToString());
+        }
+        catch { /* ignore */ }
+
+        ReportButton.IsEnabled = false;
+        ReportButton.Content = "Report created";
     }
 }

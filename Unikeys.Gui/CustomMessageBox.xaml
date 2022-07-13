@@ -37,14 +37,23 @@
             TextAlignment="Justify"
             TextWrapping="WrapWithOverflow"/>
 
-        <Button
+        <StackPanel
             Grid.Row="2"
             Grid.Column="2"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Click="ButtonBase_OnClick"
-            FontFamily="Fonts/Roboto-Regular.ttf #Roboto">
-            OK
-        </Button>
+            Orientation="Horizontal">
+            <Button
+                x:Name="ReportButton"
+                Margin="0,0,10,0"
+                Click="ReportButton_OnClick"
+                FontFamily="Fonts/Roboto-Regular.ttf #Roboto"
+                Visibility="Hidden">
+                Generate report
+            </Button>
+            <Button Click="ButtonBase_OnClick" FontFamily="Fonts/Roboto-Regular.ttf #Roboto">
+                OK
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
