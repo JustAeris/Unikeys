@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Win32;
 using Unikeys.Core;
 using ModernWpf;
@@ -238,6 +241,71 @@ namespace Unikeys.Gui
             KeyPasswordBox.IsEnabled = !locked;
             ChooseFileDecryptionButton.IsEnabled = !locked;
             DecryptButton.IsEnabled = !locked;
+        }
+
+
+        private void ChooseFileShredButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Title = "Choose files to shred",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                Multiselect = true,
+                Filter = "All files (*.*)|*.*"
+            };
+
+            dialog.ShowDialog();
+
+            FileListView.ItemsSource = dialog.FileNames;
+        }
+
+        private async void ShredButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (FileListView.Items.Count == 0)
+            {
+                new CustomMessageBox("Oops...", "You must choose at least one file to shred!",
+                    CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+                return;
+            }
+
+            Tabs.IsEnabled = false;
+            var dialog = new ConfirmShredWindow();
+            dialog.ShowDialog();
+            Tabs.IsEnabled = true;
+
+            if (dialog.Confirmed != true) return;
+
+            if (FileListView.ItemsSource is not string[] files)
+                return;
+
+            LockShredGui(true);
+            try
+            {
+                var filesToShred = files.Select(f => new FileInfo(f));
+                await SDelete.DeleteFiles(filesToShred);
+            }
+            catch (Exception exception)
+            {
+                new CustomMessageBox("Oops...", "Something went wrong while shredding the files!",
+                    CustomMessageBox.CustomMessageBoxIcons.Error, exception).Show();
+                return;
+            }
+            finally
+            {
+                LockShredGui(false);
+            }
+
+            new CustomMessageBox("Success!", "Files shredded successfully!",
+                CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+
+            FileListView.ItemsSource = null;
+        }
+
+        private void LockShredGui(bool locked)
+        {
+            ChooseFileShredButton.IsEnabled = !locked;
+            ShredButton.IsEnabled = !locked;
         }
     }
 }
