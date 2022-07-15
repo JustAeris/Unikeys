@@ -5,8 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
     Width="320"
     Height="150"
+    ui:WindowHelper.UseModernWindowStyle="True"
     Topmost="True"
     mc:Ignorable="d">
     <Grid>
