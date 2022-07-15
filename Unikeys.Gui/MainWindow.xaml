@@ -7,7 +7,7 @@
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     Title="Unikeys"
-    Width="450"
+    Width="480"
     Height="480"
     MinWidth="450"
     MinHeight="480"
@@ -29,7 +29,7 @@
             Unikeys
         </Label>
 
-        <TabControl Grid.Row="1">
+        <TabControl x:Name="Tabs" Grid.Row="1">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -192,6 +192,73 @@
                             <svgc:SvgViewbox MaxHeight="15" Source="Icons/key-black.svg"/>
                             <Label>
                                 Decrypt selected file
+                            </Label>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <svgc:SvgViewbox Height="20" Source="Icons/file-shredder-black.svg"/>
+                        <Label Style="{StaticResource RobotoMonoFont}">
+                            Shred
+                        </Label>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="1" Grid.Column="1">
+                        Choose files/folders to shred
+                    </Label>
+                    <Button
+                        x:Name="ChooseFileShredButton"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,10"
+                        HorizontalAlignment="Stretch"
+                        Click="ChooseFileShredButton_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <svgc:SvgViewbox MaxHeight="15" Source="Icons/file-search-black.svg"/>
+                            <Label>
+                                Select files
+                            </Label>
+                        </StackPanel>
+                    </Button>
+
+                    <ListBox
+                        x:Name="FileListView"
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        VerticalAlignment="Stretch"/>
+
+                    <Button
+                        x:Name="ShredButton"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="0,10"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Click="ShredButton_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <svgc:SvgViewbox MaxHeight="15" Source="Icons/trash-black.svg"/>
+                            <Label>
+                                Shred selected files
                             </Label>
                         </StackPanel>
                     </Button>

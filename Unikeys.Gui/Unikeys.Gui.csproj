@@ -19,6 +19,9 @@
 
     <ItemGroup>
         <None Remove="Icons\lock-black.svg" />
+        <Content Include="Icons\file-shredder-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Content Include="Icons\lock-black.svg">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -62,6 +65,11 @@
         <Content Include="Icons\circle-check-black.svg">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <None Remove="Icons\trash-black.svg" />
+        <Content Include="Icons\trash-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\file-x-black.svg" />
     </ItemGroup>
 
     <ItemGroup>
