@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
-using Unikeys.Core;
 using ModernWpf;
+using Unikeys.Core.FileEncryption;
+using Unikeys.Core.FileShredding;
+using Unikeys.Core.FileSigning;
+using Unikeys.Core.FolderWatcher;
 
 namespace Unikeys.Gui;
 
@@ -119,7 +122,7 @@ public partial class MainWindow
         LockEncryptionGui(true);
         try
         {
-            key = EncryptDecrypt.EncryptFile(FilePathEncryptionTextBox.Text, dialog.FileName, PasswordBox.Password);
+            key = Encryption.EncryptFile(FilePathEncryptionTextBox.Text, dialog.FileName, PasswordBox.Password);
         }
         catch (Exception exception)
         {
@@ -227,7 +230,7 @@ public partial class MainWindow
         LockDecryptionGui(true);
         try
         {
-            EncryptDecrypt.DecryptFile(FilePathDecryptionTextBox.Text, dialog.FileName, KeyPasswordBox.Password);
+            Decryption.DecryptFile(FilePathDecryptionTextBox.Text, dialog.FileName, KeyPasswordBox.Password);
         }
         catch (Exception ex)
         {

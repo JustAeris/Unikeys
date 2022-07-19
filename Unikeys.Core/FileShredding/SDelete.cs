@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Security;
 
-namespace Unikeys.Core;
+namespace Unikeys.Core.FileShredding;
 
 /// <summary>
 /// This class uses the SysInternal tool SDelete to securely overwrite a file on the disk, making it impossible to recover in any case.
@@ -102,35 +101,5 @@ public static class SDelete
             throw new SDeleteAccessDeniedException("SDelete failed to delete the file, access has been denied.");
         if (output.Contains("No files/folders found that match"))
             throw new SDeleteNotFoundException("SDelete failed to delete the file, because it could not find it");
-    }
-}
-
-/// <summary>
-/// Base SDelete exception
-/// </summary>
-public abstract class SDeleteException : Exception
-{
-    protected SDeleteException(string message) : base(message)
-    {
-    }
-}
-
-/// <summary>
-/// Occurs when the file/folder is delete before the SDelete process has finished
-/// </summary>
-public class SDeleteNotFoundException : SDeleteException
-{
-    public SDeleteNotFoundException(string message) : base(message)
-    {
-    }
-}
-
-/// <summary>
-/// Occurs when the SDelete process has failed to access the file/folder, most of the time due to a lack of permissions
-/// </summary>
-public class SDeleteAccessDeniedException : SDeleteException
-{
-    public SDeleteAccessDeniedException(string message) : base(message)
-    {
     }
 }

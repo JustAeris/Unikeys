@@ -1,4 +1,4 @@
-﻿namespace Unikeys.Core;
+﻿namespace Unikeys.Core.FolderWatcher;
 
 public sealed class CertificatesFolderWatcher
 {
@@ -53,15 +53,5 @@ public sealed class CertificatesFolderWatcher
     private void OnCertificatesListUpdated(CertificateListUpdatedEventArgs e)
     {
         CertificatesListUpdated?.Invoke(this, e);
-    }
-}
-
-public class CertificateListUpdatedEventArgs : EventArgs
-{
-    public List<FileInfo> CertificatesList { get; }
-
-    public CertificateListUpdatedEventArgs(List<FileInfo> certificatesList)
-    {
-        CertificatesList = certificatesList;
     }
 }
