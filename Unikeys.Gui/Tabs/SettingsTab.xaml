@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="300"
+    TextElement.FontFamily="{StaticResource Roboto}"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>

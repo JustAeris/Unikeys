@@ -8,11 +8,12 @@
     xmlns:uc="clr-namespace:Unikeys.Gui.Tabs"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     Title="Unikeys"
-    Width="595"
-    Height="480"
-    MinWidth="595"
-    MinHeight="480"
+    Width="530"
+    Height="400"
+    MinWidth="530"
+    MinHeight="400"
     ui:WindowHelper.UseModernWindowStyle="True"
+    TextElement.FontFamily="{StaticResource RobotoMono}"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,17 +26,17 @@
 
         <Label
             Margin="15"
-            FontSize="30"
-            Style="{StaticResource RobotoMonoFont}">
+            FontFamily="/Fonts/RobotoMono-Regular.ttf #Roboto Mono"
+            FontSize="30">
             Unikeys
         </Label>
 
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="1" TabStripPlacement="Left">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <svgc:SvgViewbox Height="20" Source="Icons/lock-black.svg"/>
-                        <Label Style="{StaticResource RobotoMonoFont}">
+                        <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Encrypt
                         </Label>
                     </StackPanel>
@@ -49,7 +50,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <svgc:SvgViewbox Height="20" Source="Icons/lock-open-black.svg"/>
-                        <Label Style="{StaticResource RobotoMonoFont}">
+                        <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Decrypt
                         </Label>
                     </StackPanel>
@@ -62,7 +63,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <svgc:SvgViewbox Height="20" Source="Icons/file-shredder-black.svg"/>
-                        <Label Style="{StaticResource RobotoMonoFont}">
+                        <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Shred
                         </Label>
                     </StackPanel>
@@ -75,7 +76,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <svgc:SvgViewbox Height="20" Source="Icons/file-certificate-black.svg"/>
-                        <Label Style="{StaticResource RobotoMonoFont}">
+                        <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Sign/Verify
                         </Label>
                     </StackPanel>
@@ -88,7 +89,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <svgc:SvgViewbox Height="20" Source="Icons/settings-black.svg"/>
-                        <Label Style="{StaticResource RobotoMonoFont}">
+                        <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Settings
                         </Label>
                     </StackPanel>
@@ -101,7 +102,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <svgc:SvgViewbox Height="20" Source="Icons/info-black.svg"/>
-                        <Label Style="{StaticResource RobotoMonoFont}">
+                        <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             About
                         </Label>
                     </StackPanel>

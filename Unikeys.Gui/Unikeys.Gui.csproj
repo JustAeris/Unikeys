@@ -18,7 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="Fonts\*.ttf" />
+        <Resource Include="Fonts\JetBrainsMono.ttf" />
+        <Resource Include="Fonts\Roboto-Regular.ttf" />
+        <Resource Include="Fonts\RobotoMono-Regular.ttf" />
     </ItemGroup>
 
     <ItemGroup>

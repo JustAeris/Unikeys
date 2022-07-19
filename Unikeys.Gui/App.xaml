@@ -12,15 +12,8 @@
                 <!--  Other merged dictionaries here  -->
             </ResourceDictionary.MergedDictionaries>
             <!--  Other app resources here  -->
-            <Style x:Key="RobotoMonoFont" TargetType="Label">
-                <Setter Property="FontFamily" Value="Fonts/RobotoMono-Regular.ttf #Roboto Mono"/>
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto"/>
-            </Style>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto"/>
-            </Style>
+            <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/#Roboto</FontFamily>
+            <FontFamily x:Key="RobotoMono">pack://application:,,,/Fonts/#Roboto Mono</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
