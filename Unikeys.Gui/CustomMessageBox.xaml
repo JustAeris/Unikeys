@@ -6,10 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:ui="http://schemas.modernwpf.com/2019"
-    Width="320"
+    Width="355"
     Height="150"
+    MinWidth="355"
+    MinHeight="150"
     ui:WindowHelper.UseModernWindowStyle="True"
     Topmost="True"
+    WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -35,6 +38,7 @@
             x:Name="MessageTextBlock"
             Grid.Row="1"
             Grid.Column="2"
+            VerticalAlignment="Center"
             FontFamily="Fonts/Roboto-Regular.ttf #Roboto"
             TextAlignment="Justify"
             TextWrapping="WrapWithOverflow"/>

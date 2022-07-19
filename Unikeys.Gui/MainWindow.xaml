@@ -10,7 +10,7 @@
     Title="Unikeys"
     Width="595"
     Height="480"
-    MinWidth="450"
+    MinWidth="595"
     MinHeight="480"
     ui:WindowHelper.UseModernWindowStyle="True"
     mc:Ignorable="d">
