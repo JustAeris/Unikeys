@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <ApplicationIcon>Icons\unikeys-logo.ico</ApplicationIcon>
+        <IsPackable>false</IsPackable>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\Unikeys.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -90,6 +94,9 @@
         <Content Include="Icons\certificate-black.svg">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <None Include="..\Unikeys.snk">
+          <Link>Unikeys.snk</Link>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
