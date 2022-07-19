@@ -70,6 +70,26 @@
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <None Remove="Icons\file-x-black.svg" />
+        <None Remove="Icons\file-certificate-black.svg" />
+        <Content Include="Icons\file-certificate-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\writing-sign-black.svg" />
+        <Content Include="Icons\writing-sign-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\shield-black.svg" />
+        <Content Include="Icons\shield-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\signature-black.svg" />
+        <Content Include="Icons\signature-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\certificate-black.svg" />
+        <Content Include="Icons\certificate-black.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>

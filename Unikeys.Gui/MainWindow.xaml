@@ -7,7 +7,7 @@
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     Title="Unikeys"
-    Width="480"
+    Width="595"
     Height="480"
     MinWidth="450"
     MinHeight="480"
@@ -263,6 +263,238 @@
                         </StackPanel>
                     </Button>
                 </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <svgc:SvgViewbox Height="20" Source="Icons/file-certificate-black.svg"/>
+                        <Label Style="{StaticResource RobotoMonoFont}">
+                            Sign/Verify
+                        </Label>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabControl>
+                    <TabItem>
+                        <TabItem.Header>
+                            <Label>Signing</Label>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="1" Grid.Column="1">
+                                Choose a file to sign
+                            </Label>
+                            <Button
+                                x:Name="ChooseFileSignButton"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Stretch"
+                                Click="ChooseFileSignButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <svgc:SvgViewbox MaxHeight="15" Source="Icons/file-search-black.svg"/>
+                                    <Label>
+                                        Select file
+                                    </Label>
+                                </StackPanel>
+                            </Button>
+                            <TextBox
+                                x:Name="FilePathSignTextBox"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                IsReadOnly="True"/>
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                VerticalAlignment="Center">
+                                Select a certificate to use
+                            </Label>
+                            <ComboBox
+                                x:Name="CertificateListComboBox"
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Name"/>
+                            <Button
+                                x:Name="SignButton"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Margin="0,10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Click="SignButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <svgc:SvgViewbox MaxHeight="15" Source="Icons/writing-sign-black.svg"/>
+                                    <Label>
+                                        Create a signature for the selected file
+                                    </Label>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <Label>Verifying</Label>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="1" Grid.Column="1">
+                                Choose a file to verify
+                            </Label>
+                            <Button
+                                x:Name="ChooseFileVerifyButton"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Stretch"
+                                Click="ChooseFileVerifyButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <svgc:SvgViewbox MaxHeight="15" Source="Icons/file-search-black.svg"/>
+                                    <Label>
+                                        Select file
+                                    </Label>
+                                </StackPanel>
+                            </Button>
+                            <TextBox
+                                x:Name="FilePathVerifyTextBox"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                IsReadOnly="True"/>
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                VerticalAlignment="Center">
+                                Select a signature file
+                            </Label>
+                            <Grid
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    x:Name="ChooseSignatureVerifyButton"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    Click="ChooseSignatureVerifyButton_OnClick">
+                                    <StackPanel Orientation="Horizontal">
+                                        <svgc:SvgViewbox MaxHeight="15" Source="Icons/signature-black.svg"/>
+                                        <Label>
+                                            Select signature
+                                        </Label>
+                                    </StackPanel>
+                                </Button>
+                                <TextBox
+                                    x:Name="SignaturePathVerifyTextBox"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True"/>
+                            </Grid>
+
+                            <Button
+                                x:Name="VerifyButton"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Margin="0,10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Click="VerifyButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <svgc:SvgViewbox MaxHeight="15" Source="Icons/shield-black.svg"/>
+                                    <Label>
+                                        Verify selected file
+                                    </Label>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <Label>Certificates</Label>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+
+                            <ListBox
+                                x:Name="CertificateListBox"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                DisplayMemberPath="Name"
+                                SelectionChanged="CertificateListBox_OnSelectionChanged"/>
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                TextAlignment="Justify"
+                                TextWrapping="Wrap">
+                                You can freely delete, rename and organize your certificates in the "Certificates" folder next to the app. Just make sure to keep them secure, otherwise the signature could be compromised.
+                            </TextBlock>
+                            <Button
+                                x:Name="AddCertificateButton"
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Click="AddCertificateButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <svgc:SvgViewbox MaxHeight="15" Source="Icons/certificate-black.svg"/>
+                                    <Label>
+                                        Add a certificate
+                                    </Label>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </TabItem>
 
             <TabItem>
