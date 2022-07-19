@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,22 @@ public partial class MainWindow
         // Dark theme will come soon
         ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
 
-        VersionLabel.Content += System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+        VersionLabel.Content += Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+
+        var watcher = new CertificatesFolderWatcher();
+        _ = Task.Run(() => watcher.Start()) ;
+
+        CertificateListBox.ItemsSource = watcher.CertificatesList;
+        CertificateListComboBox.ItemsSource = watcher.CertificatesList;
+
+        watcher.CertificatesListUpdated += (_, args) =>
+        {
+            Dispatcher.Invoke(() =>
+            {
+                CertificateListBox.ItemsSource = args.CertificatesList;
+                CertificateListComboBox.ItemsSource = args.CertificatesList;
+            });
+        };
     }
 
     /// <summary>
