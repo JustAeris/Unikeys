@@ -2,13 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using Microsoft.Win32;
 using Unikeys.Core.FileShredding;
 
 namespace Unikeys.Gui.Tabs;
 
-public partial class ShredTab : UserControl
+public partial class ShredTab
 {
     public ShredTab() => InitializeComponent();
 

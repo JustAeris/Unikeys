@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Unikeys.Gui;
 
-public partial class CustomMessageBox : Window
+public partial class CustomMessageBox
 {
     private readonly Exception? _exception;
 

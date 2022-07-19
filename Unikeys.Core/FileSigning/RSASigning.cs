@@ -17,7 +17,7 @@ public static class RSASigning
             throw new CryptographicException("Certificate does not contain a private key");
 
         return new RSASignature(rsa.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1),
-            certificate.GetRSAPublicKey() ?? throw new CryptographicException("Certificate does not contain a public key")); ;
+            certificate.GetRSAPublicKey() ?? throw new CryptographicException("Certificate does not contain a public key"));
     }
 
     public static bool VerifySignature(byte[] data, RSASignature signature) =>

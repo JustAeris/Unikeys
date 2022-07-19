@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Unikeys.Gui;
 
-public partial class ConfirmShredWindow : Window
+public partial class ConfirmShredWindow
 {
     public bool Confirmed { get; private set; }
 

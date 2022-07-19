@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using Microsoft.Win32;
 using Unikeys.Core.FileEncryption;
 
 namespace Unikeys.Gui.Tabs;
 
-public partial class DecryptTab : UserControl
+public partial class DecryptTab
 {
     private string _filePath;
 

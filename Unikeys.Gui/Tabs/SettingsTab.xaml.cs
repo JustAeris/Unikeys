@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
+﻿namespace Unikeys.Gui.Tabs;
 
-namespace Unikeys.Gui.Tabs;
-
-public partial class SettingsTab : UserControl
+public partial class SettingsTab
 {
     public SettingsTab() => InitializeComponent();
 }

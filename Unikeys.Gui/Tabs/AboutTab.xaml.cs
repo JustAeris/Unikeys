@@ -1,9 +1,8 @@
 ﻿using System.Reflection;
-using System.Windows.Controls;
 
 namespace Unikeys.Gui.Tabs;
 
-public partial class AboutTab : UserControl
+public partial class AboutTab
 {
     public AboutTab()
     {

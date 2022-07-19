@@ -9,7 +9,7 @@ using Unikeys.Core.FolderWatcher;
 
 namespace Unikeys.Gui.Tabs;
 
-public partial class SignVerifyTab : UserControl
+public partial class SignVerifyTab
 {
     public SignVerifyTab()
     {
