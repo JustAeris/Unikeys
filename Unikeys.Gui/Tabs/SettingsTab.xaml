@@ -21,10 +21,9 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Label FontSize="20">Select theme</Label>
-            <RadioButton IsChecked="True">Light</RadioButton>
-            <!--  Those buttons will be enabled when dark mode will be supported  -->
-            <RadioButton IsEnabled="False">Dark</RadioButton>
-            <RadioButton IsEnabled="False">Use system option</RadioButton>
+            <RadioButton x:Name="LightThemeButton" Click="LightThemeSelector_OnClick">Light</RadioButton>
+            <RadioButton x:Name="DarkThemeButton" Click="DarkThemeSelector_OnClick">Dark</RadioButton>
+            <RadioButton x:Name="DefaultThemeButton" Click="DefaultThemeSelector_OnClick">Use system theme</RadioButton>
         </StackPanel>
     </Grid>
 </UserControl>

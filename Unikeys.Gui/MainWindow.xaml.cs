@@ -16,10 +16,8 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
-        // Dark theme will come soon
-        ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
 
         // Set the version number in the title bar
-        Title = $"Unikeys v{Assembly.GetExecutingAssembly().GetName().Version}";
+        Title = $"Unikeys {Assembly.GetExecutingAssembly().GetName().Version}";
     }
 }
