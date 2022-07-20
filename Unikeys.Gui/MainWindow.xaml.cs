@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using ModernWpf;
 
 namespace Unikeys.Gui;
 

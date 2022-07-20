@@ -11,6 +11,10 @@ namespace Unikeys.Gui.Tabs;
 
 public partial class SignVerifyTab
 {
+    private string _fileToSignPath = "";
+    private string _fileToVerifyPath = "";
+    private FileInfo? _signatureFile;
+
     public SignVerifyTab()
     {
         InitializeComponent();
@@ -31,6 +35,11 @@ public partial class SignVerifyTab
         };
     }
 
+    /// <summary>
+    /// Allows the creation of a certificate containing a RSA key pair
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void AddCertificateButton_OnClick(object sender, RoutedEventArgs e)
     {
         Directory.CreateDirectory("Certificates");
@@ -60,6 +69,9 @@ public partial class SignVerifyTab
             CustomMessageBox.CustomMessageBoxIcons.Success).Show();
     }
 
+    /// <summary>
+    /// Choose a file to sign
+    /// </summary>
     private void ChooseFileSignButton_OnClick(object sender, RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog
@@ -73,13 +85,16 @@ public partial class SignVerifyTab
 
         dialog.ShowDialog();
 
-        FilePathSignTextBox.Text = dialog.FileName;
+        (FilePathSignTextBox.Text, _fileToSignPath) = (dialog.FileName, dialog.FileName);
     }
 
+    /// <summary>
+    /// Proceed to create a signature file
+    /// </summary>
     private void SignButton_OnClick(object sender, RoutedEventArgs e)
     {
         // Check if a file is specified
-        if (FilePathSignTextBox.Text == "")
+        if (_fileToSignPath == "")
         {
             new CustomMessageBox("Oops...", "You must specify a file to sign!",
                 CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
@@ -98,8 +113,8 @@ public partial class SignVerifyTab
         try
         {
             var cert = X509Helper.GetCertificateFromPfx(((FileInfo)CertificateListComboBox.SelectedItem).FullName);
-            var signature = RSASigning.SignData(File.ReadAllBytes(FilePathSignTextBox.Text), cert);
-            File.WriteAllText(FilePathSignTextBox.Text + ".sig.xml", signature.ToXmlString());
+            var signature = RSASigning.SignData(File.ReadAllBytes(_fileToSignPath), cert);
+            File.WriteAllText(_fileToSignPath + ".sig.xml", signature.ToXmlString());
         }
         catch (Exception exception)
         {
@@ -107,7 +122,6 @@ public partial class SignVerifyTab
                 CustomMessageBox.CustomMessageBoxIcons.Error, exception).Show();
             return;
         }
-
 
         new CustomMessageBox("Success!", "Created a signature successfully!",
             CustomMessageBox.CustomMessageBoxIcons.Success).Show();
@@ -117,6 +131,9 @@ public partial class SignVerifyTab
         CertificateListComboBox.SelectedItem = null;
     }
 
+    /// <summary>
+    /// Choose a file to verify
+    /// </summary>
     private void ChooseFileVerifyButton_OnClick(object sender, RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog
@@ -130,9 +147,12 @@ public partial class SignVerifyTab
 
         dialog.ShowDialog();
 
-        FilePathVerifyTextBox.Text = dialog.FileName;
+        (FilePathVerifyTextBox.Text, _fileToVerifyPath) = (dialog.FileName, dialog.FileName);
     }
 
+    /// <summary>
+    /// Choose a signature file for comparison
+    /// </summary>
     private void ChooseSignatureVerifyButton_OnClick(object sender, RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog
@@ -146,13 +166,17 @@ public partial class SignVerifyTab
 
         dialog.ShowDialog();
 
-        SignaturePathVerifyTextBox.Text = new FileInfo(dialog.FileName).FullName;
+        _signatureFile = new FileInfo(dialog.FileName);
+        SignaturePathVerifyTextBox.Text = _signatureFile.Name;
     }
 
+    /// <summary>
+    /// Compare the signature of the file with the file.
+    /// </summary>
     private void VerifyButton_OnClick(object sender, RoutedEventArgs e)
     {
         // Check if a file is specified
-        if (FilePathVerifyTextBox.Text == "")
+        if (_fileToVerifyPath == "")
         {
             new CustomMessageBox("Oops...", "You must specify a file to verify!",
                 CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
@@ -160,7 +184,7 @@ public partial class SignVerifyTab
         }
 
         // Check if a signature is specified
-        if (SignaturePathVerifyTextBox.Text == "")
+        if (_signatureFile == null)
         {
             new CustomMessageBox("Oops...", "You must specify a signature to verify!",
                 CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
@@ -171,8 +195,8 @@ public partial class SignVerifyTab
         bool isValid;
         try
         {
-            var signature = RSASignature.FromXmlString(File.ReadAllText(SignaturePathVerifyTextBox.Text));
-            isValid = RSASigning.VerifySignature(File.ReadAllBytes(FilePathVerifyTextBox.Text), signature);
+            var signature = RSASignature.FromXmlString(File.ReadAllText(_signatureFile.FullName));
+            isValid = RSASigning.VerifySignature(File.ReadAllBytes(_fileToVerifyPath), signature);
         }
         catch (Exception exception)
         {
@@ -191,7 +215,17 @@ public partial class SignVerifyTab
         else
             new CustomMessageBox("Oops...", "Signature is invalid! Either the file or the signature has been modified.",
                 CustomMessageBox.CustomMessageBoxIcons.Error).Show();
+
+        // Clear the text boxes
+        FilePathVerifyTextBox.Text = "";
+        SignaturePathVerifyTextBox.Text = "";
+
+        _signatureFile = null;
+        _fileToVerifyPath = "";
     }
 
+    /// <summary>
+    /// Prevents a item from being selected in the certificate list.
+    /// </summary>
     private void CertificateListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e) => CertificateListBox.SelectedItem = null;
 }
