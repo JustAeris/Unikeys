@@ -18,6 +18,7 @@ public partial class SignVerifyTab
     public SignVerifyTab()
     {
         InitializeComponent();
+        Directory.CreateDirectory("Certificates");
 
         var watcher = new CertificatesFolderWatcher();
         _ = Task.Run(() => watcher.Start()) ;
