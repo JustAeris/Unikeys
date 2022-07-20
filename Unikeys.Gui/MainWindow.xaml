@@ -35,7 +35,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox Height="20" Source="Icons/lock-black.svg"/>
+                        <svgc:SvgViewbox Height="20" Source="{DynamicResource LockIcon}"/>
                         <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Encrypt
                         </Label>
@@ -49,7 +49,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox Height="20" Source="Icons/lock-open-black.svg"/>
+                        <svgc:SvgViewbox Height="20" Source="{DynamicResource LockOpenIcon}"/>
                         <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Decrypt
                         </Label>
@@ -62,7 +62,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox Height="20" Source="Icons/file-shredder-black.svg"/>
+                        <svgc:SvgViewbox Height="20" Source="{DynamicResource FileShredderIcon}"/>
                         <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Shred
                         </Label>
@@ -75,7 +75,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox Height="20" Source="Icons/file-certificate-black.svg"/>
+                        <svgc:SvgViewbox Height="20" Source="{DynamicResource FileCertificateIcon}"/>
                         <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Sign/Verify
                         </Label>
@@ -88,7 +88,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox Height="20" Source="Icons/settings-black.svg"/>
+                        <svgc:SvgViewbox Height="20" Source="{DynamicResource SettingsIcon}"/>
                         <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             Settings
                         </Label>
@@ -101,7 +101,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox Height="20" Source="Icons/info-black.svg"/>
+                        <svgc:SvgViewbox Height="20" Source="{DynamicResource InfoIcon}"/>
                         <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
                             About
                         </Label>

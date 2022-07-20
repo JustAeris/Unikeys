@@ -41,7 +41,7 @@
                     HorizontalAlignment="Stretch"
                     Click="ChooseFileSignButton_OnClick">
                     <StackPanel Margin="0,3" Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="19" Source="Icons/file-search-black.svg"/>
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource FileSearchIcon}"/>
                         <Label Margin="5,0,0,0">
                             Select file
                         </Label>
@@ -72,7 +72,7 @@
                     VerticalAlignment="Center"
                     Click="SignButton_OnClick">
                     <StackPanel Margin="0,3" Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="19" Source="Icons/writing-sign-black.svg"/>
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource WritingSignatureIcon}"/>
                         <Label Margin="5,0,0,0">
                             Create a signature for the selected file
                         </Label>
@@ -112,7 +112,7 @@
                     HorizontalAlignment="Stretch"
                     Click="ChooseFileVerifyButton_OnClick">
                     <StackPanel Margin="0,3" Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="19" Source="Icons/file-search-black.svg"/>
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource FileSearchIcon}"/>
                         <Label Margin="5,0,0,0">
                             Select file
                         </Label>
@@ -144,7 +144,7 @@
                         VerticalAlignment="Center"
                         Click="ChooseSignatureVerifyButton_OnClick">
                         <StackPanel Margin="0,3" Orientation="Horizontal">
-                            <svgc:SvgViewbox MaxHeight="19" Source="Icons/signature-black.svg"/>
+                            <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource SignatureIcon}"/>
                             <Label Margin="5,0,0,0">
                                 Select signature
                             </Label>
@@ -165,7 +165,7 @@
                     VerticalAlignment="Center"
                     Click="VerifyButton_OnClick">
                     <StackPanel Margin="0,3" Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="19" Source="Icons/shield-black.svg"/>
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource ShieldIcon}"/>
                         <Label Margin="5,0,0,0">
                             Verify selected file
                         </Label>
@@ -216,7 +216,7 @@
                     VerticalAlignment="Center"
                     Click="AddCertificateButton_OnClick">
                     <StackPanel Margin="0,3" Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="19" Source="Icons/certificate-black.svg"/>
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource CertificateIcon}"/>
                         <Label Margin="5,0,0,0">
                             Add a certificate
                         </Label>

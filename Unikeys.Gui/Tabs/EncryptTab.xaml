@@ -37,7 +37,7 @@
             HorizontalAlignment="Stretch"
             Click="ChooseFileButton_OnClick">
             <StackPanel Margin="0,3" Orientation="Horizontal">
-                <svgc:SvgViewbox MaxHeight="19" Source="Icons/file-search-black.svg"/>
+                <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource FileSearchIcon}"/>
                 <Label
                     Margin="5,0,0,0"
                     VerticalAlignment="Center"
@@ -59,11 +59,11 @@
             <Label VerticalAlignment="Center">
                 Input a password (optional)
             </Label>
-            <Button Background="White" Click="HelpButton_OnClick">
+            <Button Background="Transparent" Click="HelpButton_OnClick">
                 <svgc:SvgViewbox
                     MaxHeight="15"
                     Margin="-6,-5"
-                    Source="Icons/help-black.svg"/>
+                    Source="{DynamicResource HelpIcon}"/>
             </Button>
         </StackPanel>
         <PasswordBox
@@ -79,7 +79,7 @@
             VerticalAlignment="Center"
             Click="EncryptButton_OnClick">
             <StackPanel Margin="0,3" Orientation="Horizontal">
-                <svgc:SvgViewbox MaxHeight="19" Source="Icons/key-black.svg"/>
+                <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource KeyIcon}"/>
                 <Label
                     Margin="5,0,0,0"
                     HorizontalAlignment="Center"

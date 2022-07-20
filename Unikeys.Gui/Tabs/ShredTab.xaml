@@ -36,7 +36,7 @@
             HorizontalAlignment="Stretch"
             Click="ChooseFilesButton_OnClick">
             <StackPanel Margin="0,3" Orientation="Horizontal">
-                <svgc:SvgViewbox MaxHeight="19" Source="Icons/file-search-black.svg"/>
+                <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource FileSearchIcon}"/>
                 <Label Margin="5,0,0,0" FontFamily="{StaticResource Roboto}">
                     Select files
                 </Label>
@@ -58,7 +58,7 @@
             VerticalAlignment="Center"
             Click="ShredButton_OnClick">
             <StackPanel Margin="0,3" Orientation="Horizontal">
-                <svgc:SvgViewbox MaxHeight="19" Source="Icons/trash-black.svg"/>
+                <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource TrashIcon}"/>
                 <Label Margin="5,0,0,0" FontFamily="{StaticResource Roboto}">
                     Shred selected files
                 </Label>
