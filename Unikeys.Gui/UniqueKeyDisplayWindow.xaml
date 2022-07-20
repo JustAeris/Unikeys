@@ -36,7 +36,7 @@
             Grid.Column="1"
             MaxHeight="30"
             Margin="0,0,10,0"
-            Source="Icons/circle-check-black.svg"/>
+            Source="{DynamicResource CircleCheckIcon}"/>
         <TextBlock
             Grid.Row="1"
             Grid.Column="2"

@@ -10,6 +10,7 @@
         <IsPackable>false</IsPackable>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\Unikeys.snk</AssemblyOriginatorKeyFile>
+        <Deterministic>false</Deterministic>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,85 +19,31 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="Fonts\*.ttf" />
+        <Resource Include="Fonts\JetBrainsMono.ttf" />
+        <Resource Include="Fonts\Roboto-Regular.ttf" />
+        <Resource Include="Fonts\RobotoMono-Regular.ttf" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Icons\lock-black.svg" />
-        <Content Include="Icons\file-shredder-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Icons\lock-black.svg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\info-black.svg" />
-        <Content Include="Icons\info-black.svg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\lock-open-black.svg" />
-        <Content Include="Icons\lock-open-black.svg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\help-black.svg" />
-        <Content Include="Icons\help-black.svg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\key-black.svg" />
-        <Content Include="Icons\key-black.svg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\file-search-black.svg" />
-        <Content Include="Icons\file-search-black.svg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\alert-triangle-black.svg" />
-        <Content Include="Icons\alert-triangle-black.svg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\settings-black.svg" />
-        <Content Include="Icons\settings-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\alert-octogon-black.svg" />
-        <Content Include="Icons\alert-octogon-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
         <None Remove="Icons\unikeys-logo.png" />
         <Content Include="Icons\unikeys-logo.png">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\circle-check-black.svg" />
-        <Content Include="Icons\circle-check-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\trash-black.svg" />
-        <Content Include="Icons\trash-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\file-x-black.svg" />
-        <None Remove="Icons\file-certificate-black.svg" />
-        <Content Include="Icons\file-certificate-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\writing-sign-black.svg" />
-        <Content Include="Icons\writing-sign-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\shield-black.svg" />
-        <Content Include="Icons\shield-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\signature-black.svg" />
-        <Content Include="Icons\signature-black.svg">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Icons\certificate-black.svg" />
-        <Content Include="Icons\certificate-black.svg">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <None Include="..\Unikeys.snk">
           <Link>Unikeys.snk</Link>
         </None>
+        <None Remove="Icons\Dark\*.svg" />
+        <Content Include="Icons\Dark\*.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Icons\Light\*.svg" />
+        <Content Include="Icons\Light\*.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="appsettings.json" />
+        <Content Include="appsettings.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>

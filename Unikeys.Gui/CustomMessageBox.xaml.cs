@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using SharpVectors.Converters;
 
 namespace Unikeys.Gui;
 
@@ -20,19 +21,19 @@ public partial class CustomMessageBox
             case CustomMessageBoxIcons.None:
                 break;
             case CustomMessageBoxIcons.Error:
-                IconSvgViewbox.Source = new Uri("Icons/alert-octogon-black.svg", UriKind.Relative);
+                IconSvgViewbox.SetResourceReference(SvgViewbox.SourceProperty, "AlertOctagonIcon");
                 break;
             case CustomMessageBoxIcons.Info:
-                IconSvgViewbox.Source = new Uri("Icons/info-black.svg", UriKind.Relative);
+                IconSvgViewbox.SetResourceReference(SvgViewbox.SourceProperty, "InfoIcon");
                 break;
             case CustomMessageBoxIcons.Question:
-                IconSvgViewbox.Source = new Uri("Icons/help-black.svg", UriKind.Relative);
+                IconSvgViewbox.SetResourceReference(SvgViewbox.SourceProperty, "HelpIcon");
                 break;
             case CustomMessageBoxIcons.Warning:
-                IconSvgViewbox.Source = new Uri("Icons/alert-triangle-black.svg", UriKind.Relative);
+                IconSvgViewbox.SetResourceReference(SvgViewbox.SourceProperty, "AlertTriangleIcon");
                 break;
             case CustomMessageBoxIcons.Success:
-                IconSvgViewbox.Source = new Uri("Icons/circle-check-black.svg", UriKind.Relative);
+                IconSvgViewbox.SetResourceReference(SvgViewbox.SourceProperty, "CircleCheckIcon");
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(icon), icon, null);

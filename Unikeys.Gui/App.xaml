@@ -2,25 +2,64 @@
     x:Class="Unikeys.Gui.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeResources/>
+                <ui:ThemeResources>
+                    <ui:ThemeResources.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Light">
+                            <!--  ReSharper disable Xaml.ConstructorWarning  -->
+                            <system:Uri x:Key="AlertOctagonIcon">/Icons/Light/alert-octagon-black.svg</system:Uri>
+                            <system:Uri x:Key="AlertTriangleIcon">/Icons/Light/alert-triangle-black.svg</system:Uri>
+                            <system:Uri x:Key="CertificateIcon">/Icons/Light/certificate-black.svg</system:Uri>
+                            <system:Uri x:Key="CircleCheckIcon">/Icons/Light/circle-check-black.svg</system:Uri>
+                            <system:Uri x:Key="FileCertificateIcon">/Icons/Light/file-certificate-black.svg</system:Uri>
+                            <system:Uri x:Key="FileSearchIcon">/Icons/Light/file-search-black.svg</system:Uri>
+                            <system:Uri x:Key="FileShredderIcon">/Icons/Light/file-shredder-black.svg</system:Uri>
+                            <system:Uri x:Key="HelpIcon">/Icons/Light/help-black.svg</system:Uri>
+                            <system:Uri x:Key="InfoIcon">/Icons/Light/info-black.svg</system:Uri>
+                            <system:Uri x:Key="KeyIcon">/Icons/Light/key-black.svg</system:Uri>
+                            <system:Uri x:Key="LockIcon">/Icons/Light/lock-black.svg</system:Uri>
+                            <system:Uri x:Key="LockOpenIcon">/Icons/Light/lock-open-black.svg</system:Uri>
+                            <system:Uri x:Key="SettingsIcon">/Icons/Light/settings-black.svg</system:Uri>
+                            <system:Uri x:Key="ShieldIcon">/Icons/Light/shield-black.svg</system:Uri>
+                            <system:Uri x:Key="SignatureIcon">/Icons/Light/signature-black.svg</system:Uri>
+                            <system:Uri x:Key="TrashIcon">/Icons/Light/trash-black.svg</system:Uri>
+                            <system:Uri x:Key="WritingSignatureIcon">/Icons/Light/writing-sign-black.svg</system:Uri>
+                            <!--  ReSharper restore Xaml.ConstructorWarning  -->
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Dark">
+                            <!--  ReSharper disable Xaml.ConstructorWarning  -->
+                            <system:Uri x:Key="AlertOctagonIcon">/Icons/Dark/alert-octagon-white.svg</system:Uri>
+                            <system:Uri x:Key="AlertTriangleIcon">/Icons/Dark/alert-triangle-white.svg</system:Uri>
+                            <system:Uri x:Key="CertificateIcon">/Icons/Dark/certificate-white.svg</system:Uri>
+                            <system:Uri x:Key="CircleCheckIcon">/Icons/Dark/circle-check-white.svg</system:Uri>
+                            <system:Uri x:Key="FileCertificateIcon">/Icons/Dark/file-certificate-white.svg</system:Uri>
+                            <system:Uri x:Key="FileSearchIcon">/Icons/Dark/file-search-white.svg</system:Uri>
+                            <system:Uri x:Key="FileShredderIcon">/Icons/Dark/file-shredder-white.svg</system:Uri>
+                            <system:Uri x:Key="HelpIcon">/Icons/Dark/help-white.svg</system:Uri>
+                            <system:Uri x:Key="InfoIcon">/Icons/Dark/info-white.svg</system:Uri>
+                            <system:Uri x:Key="KeyIcon">/Icons/Dark/key-white.svg</system:Uri>
+                            <system:Uri x:Key="LockIcon">/Icons/Dark/lock-white.svg</system:Uri>
+                            <system:Uri x:Key="LockOpenIcon">/Icons/Dark/lock-open-white.svg</system:Uri>
+                            <system:Uri x:Key="SettingsIcon">/Icons/Dark/settings-white.svg</system:Uri>
+                            <system:Uri x:Key="ShieldIcon">/Icons/Dark/shield-white.svg</system:Uri>
+                            <system:Uri x:Key="SignatureIcon">/Icons/Dark/signature-white.svg</system:Uri>
+                            <system:Uri x:Key="TrashIcon">/Icons/Dark/trash-white.svg</system:Uri>
+                            <system:Uri x:Key="WritingSignatureIcon">/Icons/Dark/writing-sign-white.svg</system:Uri>
+                            <!--  ReSharper restore Xaml.ConstructorWarning  -->
+                        </ResourceDictionary>
+                    </ui:ThemeResources.ThemeDictionaries>
+                </ui:ThemeResources>
                 <ui:XamlControlsResources/>
                 <!--  Other merged dictionaries here  -->
             </ResourceDictionary.MergedDictionaries>
             <!--  Other app resources here  -->
-            <Style x:Key="RobotoMonoFont" TargetType="Label">
-                <Setter Property="FontFamily" Value="Fonts/RobotoMono-Regular.ttf #Roboto Mono"/>
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto"/>
-            </Style>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto"/>
-            </Style>
+            <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/#Roboto</FontFamily>
+            <FontFamily x:Key="RobotoMono">pack://application:,,,/Fonts/#Roboto Mono</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

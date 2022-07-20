@@ -7,6 +7,7 @@
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     d:DesignHeight="300"
     d:DesignWidth="300"
+    TextElement.FontFamily="{StaticResource Roboto}"
     mc:Ignorable="d">
     <TabControl>
         <TabItem>
@@ -39,9 +40,9 @@
                     Margin="0,0,0,10"
                     HorizontalAlignment="Stretch"
                     Click="ChooseFileSignButton_OnClick">
-                    <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="15" Source="Icons/file-search-black.svg"/>
-                        <Label>
+                    <StackPanel Margin="0,3" Orientation="Horizontal">
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource FileSearchIcon}"/>
+                        <Label Margin="5,0,0,0">
                             Select file
                         </Label>
                     </StackPanel>
@@ -70,9 +71,9 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Click="SignButton_OnClick">
-                    <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="15" Source="Icons/writing-sign-black.svg"/>
-                        <Label>
+                    <StackPanel Margin="0,3" Orientation="Horizontal">
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource WritingSignatureIcon}"/>
+                        <Label Margin="5,0,0,0">
                             Create a signature for the selected file
                         </Label>
                     </StackPanel>
@@ -110,9 +111,9 @@
                     Margin="0,0,0,10"
                     HorizontalAlignment="Stretch"
                     Click="ChooseFileVerifyButton_OnClick">
-                    <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="15" Source="Icons/file-search-black.svg"/>
-                        <Label>
+                    <StackPanel Margin="0,3" Orientation="Horizontal">
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource FileSearchIcon}"/>
+                        <Label Margin="5,0,0,0">
                             Select file
                         </Label>
                     </StackPanel>
@@ -142,9 +143,9 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Click="ChooseSignatureVerifyButton_OnClick">
-                        <StackPanel Orientation="Horizontal">
-                            <svgc:SvgViewbox MaxHeight="15" Source="Icons/signature-black.svg"/>
-                            <Label>
+                        <StackPanel Margin="0,3" Orientation="Horizontal">
+                            <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource SignatureIcon}"/>
+                            <Label Margin="5,0,0,0">
                                 Select signature
                             </Label>
                         </StackPanel>
@@ -163,9 +164,9 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Click="VerifyButton_OnClick">
-                    <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="15" Source="Icons/shield-black.svg"/>
-                        <Label>
+                    <StackPanel Margin="0,3" Orientation="Horizontal">
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource ShieldIcon}"/>
+                        <Label Margin="5,0,0,0">
                             Verify selected file
                         </Label>
                     </StackPanel>
@@ -202,6 +203,7 @@
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="1"
+                    FontSize="12"
                     TextAlignment="Justify"
                     TextWrapping="Wrap">
                     You can freely delete, rename and organize your certificates in the "Certificates" folder next to the app. Just make sure to keep them secure, otherwise the signature could be compromised.
@@ -213,9 +215,9 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Click="AddCertificateButton_OnClick">
-                    <StackPanel Orientation="Horizontal">
-                        <svgc:SvgViewbox MaxHeight="15" Source="Icons/certificate-black.svg"/>
-                        <Label>
+                    <StackPanel Margin="0,3" Orientation="Horizontal">
+                        <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource CertificateIcon}"/>
+                        <Label Margin="5,0,0,0">
                             Add a certificate
                         </Label>
                     </StackPanel>
