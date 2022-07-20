@@ -10,6 +10,7 @@
         <IsPackable>false</IsPackable>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\Unikeys.snk</AssemblyOriginatorKeyFile>
+        <Deterministic>false</Deterministic>
     </PropertyGroup>
 
     <ItemGroup>
