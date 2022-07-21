@@ -122,5 +122,9 @@ public partial class DecryptTab
         PasswordInputBox.IsEnabled = !locked;
         ChooseFileButton.IsEnabled = !locked;
         DecryptButton.IsEnabled = !locked;
+
+        // Shows a loading animation while the decryption is in progress
+        DecryptButtonContent.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
+        ProgressIndicator.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
     }
 }

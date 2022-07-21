@@ -84,5 +84,10 @@ public partial class ShredTab
     {
         ChooseFilesButton.IsEnabled = !locked;
         ShredButton.IsEnabled = !locked;
+        FileListView.IsEnabled = !locked;
+
+        // Show a loading animation while shredding
+        ShredButtonContent.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
+        ProgressIndicator.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
     }
 }

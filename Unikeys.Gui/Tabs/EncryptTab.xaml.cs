@@ -130,5 +130,9 @@ public partial class EncryptTab
         PasswordInputBox.IsEnabled = !locked;
         ChooseFileButton.IsEnabled = !locked;
         EncryptButton.IsEnabled = !locked;
+
+        // Show a loading animation while the encryption is in progress
+        EncryptButtonContent.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
+        ProgressIndicator.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
     }
 }

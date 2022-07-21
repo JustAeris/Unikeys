@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
     d:DesignHeight="300"
     d:DesignWidth="300"
     TextElement.FontFamily="{StaticResource Roboto}"
@@ -57,12 +58,22 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Center"
             Click="ShredButton_OnClick">
-            <StackPanel Margin="0,3" Orientation="Horizontal">
-                <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource TrashIcon}"/>
-                <Label Margin="5,0,0,0" FontFamily="{StaticResource Roboto}">
-                    Shred selected files
-                </Label>
-            </StackPanel>
+            <Grid>
+                <StackPanel
+                    x:Name="ShredButtonContent"
+                    Margin="0,3"
+                    Orientation="Horizontal">
+                    <svgc:SvgViewbox MaxHeight="19" Source="{DynamicResource TrashIcon}"/>
+                    <Label Margin="5,0,0,0" FontFamily="{StaticResource Roboto}">
+                        Shred selected files
+                    </Label>
+                </StackPanel>
+                <ui:ProgressRing
+                    x:Name="ProgressIndicator"
+                    Foreground="{DynamicResource InvertedForegroundColor}"
+                    IsActive="True"
+                    Visibility="Collapsed"/>
+            </Grid>
         </Button>
     </Grid>
 </UserControl>
