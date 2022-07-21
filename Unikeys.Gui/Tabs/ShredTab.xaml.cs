@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using Unikeys.Core.FileShredding;
@@ -56,7 +57,7 @@ public partial class ShredTab
         try
         {
             var filesToShred = files.Select(f => new FileInfo(f));
-            await SDelete.DeleteFiles(filesToShred);
+            await Task.Run(() => SDelete.DeleteFiles(filesToShred));
         }
         catch (Exception exception)
         {
@@ -83,5 +84,10 @@ public partial class ShredTab
     {
         ChooseFilesButton.IsEnabled = !locked;
         ShredButton.IsEnabled = !locked;
+        FileListView.IsEnabled = !locked;
+
+        // Show a loading animation while shredding
+        ShredButtonContent.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
+        ProgressIndicator.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
     }
 }

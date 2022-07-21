@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using Unikeys.Core.FileEncryption;
@@ -37,7 +38,7 @@ public partial class DecryptTab
     /// <summary>
     /// Decrypts the file with the specified password
     /// </summary>
-    private void DecryptButton_OnClick(object sender, RoutedEventArgs e)
+    private async void DecryptButton_OnClick(object sender, RoutedEventArgs e)
     {
         // Check if a file is selected
         if (_filePath == "")
@@ -88,7 +89,7 @@ public partial class DecryptTab
         LockDecryptionGui(true);
         try
         {
-            Decryption.DecryptFile(_filePath, dialog.FileName, PasswordInputBox.Password);
+            await Task.Run(() => Decryption.DecryptFile(_filePath, dialog.FileName, PasswordInputBox.Password));
         }
         catch (Exception ex)
         {
@@ -121,5 +122,9 @@ public partial class DecryptTab
         PasswordInputBox.IsEnabled = !locked;
         ChooseFileButton.IsEnabled = !locked;
         DecryptButton.IsEnabled = !locked;
+
+        // Shows a loading animation while the decryption is in progress
+        DecryptButtonContent.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
+        ProgressIndicator.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
     }
 }

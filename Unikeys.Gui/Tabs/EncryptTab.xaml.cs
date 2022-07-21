@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using Unikeys.Core.FileEncryption;
@@ -47,7 +48,7 @@ public partial class EncryptTab
     /// <summary>
     /// Encrypts the file with the specified password
     /// </summary>
-    private void EncryptButton_OnClick(object sender, RoutedEventArgs e)
+    private async void EncryptButton_OnClick(object sender, RoutedEventArgs e)
     {
         // Check if a file has been chosen
         if (_filePath == "")
@@ -91,13 +92,14 @@ public partial class EncryptTab
         LockEncryptionGui(true);
         try
         {
-            key = Encryption.EncryptFile(_filePath, dialog.FileName, PasswordInputBox.Password);
+            await Task.Run(() => key = Encryption.EncryptFile(_filePath, dialog.FileName, PasswordInputBox.Password));
         }
         catch (Exception exception)
         {
             new CustomMessageBox(
                 "Oops...", "Something went wrong during encryption", CustomMessageBox.CustomMessageBoxIcons.Error,
                 exception).Show();
+            return;
         }
         finally
         {
@@ -128,5 +130,9 @@ public partial class EncryptTab
         PasswordInputBox.IsEnabled = !locked;
         ChooseFileButton.IsEnabled = !locked;
         EncryptButton.IsEnabled = !locked;
+
+        // Show a loading animation while the encryption is in progress
+        EncryptButtonContent.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
+        ProgressIndicator.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
     }
 }
