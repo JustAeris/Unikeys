@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using Unikeys.Core.FileShredding;
@@ -56,7 +57,7 @@ public partial class ShredTab
         try
         {
             var filesToShred = files.Select(f => new FileInfo(f));
-            await SDelete.DeleteFiles(filesToShred);
+            await Task.Run(() => SDelete.DeleteFiles(filesToShred));
         }
         catch (Exception exception)
         {
