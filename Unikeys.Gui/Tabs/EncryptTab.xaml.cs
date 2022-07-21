@@ -92,7 +92,7 @@ public partial class EncryptTab
         LockEncryptionGui(true);
         try
         {
-            await Task.Run(() => key = Encryption.EncryptFile(_filePath, dialog.FileName, PasswordInputBox.Password));
+            await Task.Run(() => key = EncryptionDecryption.EncryptFile(_filePath, dialog.FileName, PasswordInputBox.Password));
         }
         catch (Exception exception)
         {
