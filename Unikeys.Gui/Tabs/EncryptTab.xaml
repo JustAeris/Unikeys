@@ -67,10 +67,39 @@
                     Source="{DynamicResource HelpIcon}"/>
             </Button>
         </StackPanel>
-        <PasswordBox
-            x:Name="PasswordInputBox"
-            Grid.Row="6"
-            Grid.Column="1"/>
+        <Grid Grid.Row="6" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <PasswordBox x:Name="PasswordInputBox" HorizontalAlignment="Stretch"/>
+            <Button
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Click="CopyButton_OnClick"
+                ToolTip="Copy to clipboard">
+                <svgc:SvgViewbox
+                    Height="19"
+                    MaxHeight="19"
+                    Source="{DynamicResource CopyIcon}"/>
+            </Button>
+            <Button
+                Grid.Column="4"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Click="GeneratePasswordButton_OnClick"
+                ToolTip="Generate a strong password">
+                <svgc:SvgViewbox
+                    Height="19"
+                    MaxHeight="19"
+                    Source="{DynamicResource RefreshIcon}"/>
+            </Button>
+        </Grid>
+
 
         <Button
             x:Name="EncryptButton"

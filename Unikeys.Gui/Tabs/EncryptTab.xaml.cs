@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Win32;
 using Unikeys.Core.FileEncryption;
 
@@ -134,5 +135,51 @@ public partial class EncryptTab
         // Show a loading animation while the encryption is in progress
         EncryptButtonContent.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
         ProgressIndicator.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    /// <summary>
+    /// Copies the current password to the clipboard
+    /// </summary>
+    private void CopyButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (Clipboard.GetText() == PasswordInputBox.Password || PasswordInputBox.Password == "") return;
+
+        Clipboard.SetText(PasswordInputBox.Password);
+        _ = Task.Run(() => Dispatcher.Invoke(async () => await ShowToolTip((Button)sender, "Copied to clipboard!")));
+    }
+
+    /// <summary>
+    /// Generates a strong password
+    /// </summary>
+    private void GeneratePasswordButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        PasswordInputBox.Password = PasswordGenerator.GetNewPassword();
+        _ = Task.Run(() => Dispatcher.Invoke(async () => await ShowToolTip((Button)sender, "A new password has been generated!")));
+    }
+
+    /// <summary>
+    /// Show a tooltip to act a popup.
+    /// </summary>
+    /// <param name="sender">Control where the tooltip is</param>
+    /// <param name="text">Text to display inside. Previous content will be restored on tooltip's closing</param>
+    private static async Task ShowToolTip(Control sender, string text)
+    {
+        var toolTip = new ToolTip();
+
+        if (sender.ToolTip != null)
+        {
+            var previousText = sender.ToolTip;
+
+            toolTip.Content = text;
+            toolTip.StaysOpen = true;
+            toolTip.IsOpen = true;
+
+            await Task.Delay(1500);
+
+            toolTip.StaysOpen = false;
+            toolTip.IsOpen = false;
+            await Task.Delay(100);
+            toolTip.Content = previousText;
+        }
     }
 }
