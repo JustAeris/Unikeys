@@ -49,7 +49,7 @@
             <Image
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Source="Icons/unikeys-logo.png"
+                Source="/Icons/unikeys-logo.png"
                 ToolTip="Logo made by JustWyren"/>
         </StackPanel>
     </Grid>
