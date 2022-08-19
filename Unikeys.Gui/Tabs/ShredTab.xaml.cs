@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ using Unikeys.Core.FileShredding;
 
 namespace Unikeys.Gui.Tabs;
 
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
 public partial class ShredTab
 {
     public ShredTab() => InitializeComponent();
@@ -56,8 +59,56 @@ public partial class ShredTab
         LockShredGui(true);
         try
         {
-            var filesToShred = files.Select(f => new FileInfo(f));
-            await Task.Run(() => SDelete.DeleteFiles(filesToShred));
+            var startAsAdmin = false;
+            var filesToShred = files.Select(f => new FileInfo(f)).ToList();
+            foreach (var info in filesToShred)
+            {
+                try
+                {
+                    await File.OpenWrite(info.FullName).DisposeAsync();
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    startAsAdmin = true;
+                    break;
+                }
+            }
+
+            if (startAsAdmin)
+            {
+                var result = MessageBox.Show("Unauthorized access",
+                    "You do not have permission to access all of the files you selected.\n\n" +
+                    "Do you want to start the shredding process as an administrator?\n" +
+                    "Selecting 'No' will ignore non-accessible files.",
+                    MessageBox.MessageBoxIcons.Warning, MessageBox.MessageBoxButtons.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBox.MessageBoxResult.Cancel:
+                        return;
+                    case MessageBox.MessageBoxResult.Yes:
+                        break;
+                    case MessageBox.MessageBoxResult.No:
+                        startAsAdmin = false;
+                        break;
+                    default:
+                        return;
+                }
+            }
+
+            await Task.Run(async () =>
+            {
+                using var sd = new SDelete(startAsAdmin);
+                await sd.DeleteFiles(filesToShred);
+            });
+        }
+        catch (SDeleteAccessDeniedException)
+        {
+        }
+        catch (Win32Exception)
+        {
+            MessageBox.Show("Oops...", "SDelete did not get administrator privileges.",
+                MessageBox.MessageBoxIcons.Warning);
+            return;
         }
         catch (Exception exception)
         {
