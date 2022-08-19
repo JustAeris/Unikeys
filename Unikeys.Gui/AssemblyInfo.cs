@@ -10,4 +10,4 @@ using System.Windows;
     // app, or any theme specific resource dictionaries)
 )]
 // The program will pull this version to display in the "About" tab
-[assembly: AssemblyVersion("1.2.4.*")]
+[assembly: AssemblyVersion("1.2.5.*")]
