@@ -48,4 +48,10 @@
       <ProjectReference Include="..\Unikeys.Core\Unikeys.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="MessageBox.xaml.cs">
+        <DependentUpon>MessageBox.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

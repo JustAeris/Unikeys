@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
@@ -43,27 +44,28 @@ public partial class DecryptTab
         // Check if a file is selected
         if (_filePath == "")
         {
-            new CustomMessageBox("Oops...", "You must choose a file to decrypt!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must choose a file to decrypt!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
         // Check if the file is a unikeys file
         if (!_filePath.EndsWith(".unikeys"))
         {
-            new CustomMessageBox("Oops...", "The file you want to decrypt is not a unikeys file!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "The file you want to decrypt is not a unikeys file!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
         // Check if a password is specified
         if (PasswordInputBox.Password == "")
         {
-            new CustomMessageBox("Oops...", "You must specify a key password!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must specify a key password!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
+        var info = new FileInfo(_filePath.Replace(".unikeys", ""));
         // Ask the user where to save the file
         var dialog = new SaveFileDialog
         {
@@ -71,8 +73,10 @@ public partial class DecryptTab
             CheckPathExists = true,
             CheckFileExists = false,
             OverwritePrompt = true,
-            FileName = _filePath.Replace(".unikeys", ""),
-            Filter = "All files (*.*)|*.*"
+            InitialDirectory = info.Directory?.FullName,
+            FileName = info.Name,
+            Filter = $"{info.Extension.Replace(".", "").ToUpper()} files (*{info.Extension})|*{info.Extension}",
+            AddExtension = true
         };
 
         dialog.ShowDialog();
@@ -80,8 +84,8 @@ public partial class DecryptTab
         // Abort the decryption if the user didn't choose a file and show a message
         if (dialog.FileName == "")
         {
-            new CustomMessageBox("Oops...", "You must specify where to save the file!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must specify where to save the file!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
@@ -93,8 +97,8 @@ public partial class DecryptTab
         }
         catch (Exception ex)
         {
-            new CustomMessageBox("Oops...", "Something went wrong while decrypting the file! Maybe a wrong password?",
-                CustomMessageBox.CustomMessageBoxIcons.Error, ex).Show();
+            MessageBox.Show("Oops...", "Something went wrong while decrypting the file! Maybe a wrong password?",
+                MessageBox.MessageBoxIcons.Error, exception: ex);
             return;
         }
         finally
@@ -102,8 +106,8 @@ public partial class DecryptTab
             LockDecryptionGui(false);
         }
 
-        new CustomMessageBox("Success!", "File decrypted successfully!",
-            CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+        MessageBox.Show("Success!", "File decrypted successfully!",
+            MessageBox.MessageBoxIcons.Success);
 
         // Clear the text boxes
         FilePathTextBox.Text = "";

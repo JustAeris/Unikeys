@@ -43,9 +43,9 @@
             FontFamily="Fonts/Roboto-Regular.ttf #Roboto"
             TextAlignment="Justify"
             TextWrapping="WrapWithOverflow">
-            Here is your unique key, make sure to save it now or<Bold>it will be lost</Bold>
+            Here is your unique key, make sure to save it now or&#160;<Bold>it will be lost</Bold>
             .<LineBreak/>
-            You will only see it<Bold>once</Bold>
+            You will only see it&#160;<Bold>once</Bold>
             !</TextBlock>
 
         <TextBox

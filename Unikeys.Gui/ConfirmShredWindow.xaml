@@ -8,10 +8,10 @@
     xmlns:ui="http://schemas.modernwpf.com/2019"
     Title="Confirm?"
     Width="390"
-    Height="160"
     MinWidth="390"
     MinHeight="160"
     ui:WindowHelper.UseModernWindowStyle="True"
+    SizeToContent="Height"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Grid>
@@ -44,6 +44,10 @@
             TextWrapping="WrapWithOverflow">
             Are you sure you want to delete those files forever?<LineBreak/>
             <Bold>This process CANNOT be reversed!</Bold>
+            <LineBreak/>
+            <Separator/>
+            <LineBreak/>
+            By proceeding, you comply with SDelete's EULA, which can be found&#160;<Hyperlink Click="OpenEula">here</Hyperlink>
         </TextBlock>
 
         <Grid
