@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
@@ -64,6 +65,7 @@ public partial class DecryptTab
             return;
         }
 
+        var info = new FileInfo(_filePath.Replace(".unikeys", ""));
         // Ask the user where to save the file
         var dialog = new SaveFileDialog
         {
@@ -71,8 +73,10 @@ public partial class DecryptTab
             CheckPathExists = true,
             CheckFileExists = false,
             OverwritePrompt = true,
-            FileName = _filePath.Replace(".unikeys", ""),
-            Filter = "All files (*.*)|*.*"
+            InitialDirectory = info.Directory?.FullName,
+            FileName = info.Name,
+            Filter = $"{info.Extension.Replace(".", "").ToUpper()} files (*{info.Extension})|*{info.Extension}",
+            AddExtension = true
         };
 
         dialog.ShowDialog();
