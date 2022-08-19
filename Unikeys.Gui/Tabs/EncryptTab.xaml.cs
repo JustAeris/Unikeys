@@ -41,9 +41,9 @@ public partial class EncryptTab
     /// Shows some help about the unique key feature
     /// </summary>
     private void HelpButton_OnClick(object sender, RoutedEventArgs e) =>
-        new CustomMessageBox("Quick tip!",
+        MessageBox.Show("Quick tip!",
             "If you don't specify a password, the program will generate for you a strong decryption key, but you will be able to see it only once, so make sur to save it in time!",
-            CustomMessageBox.CustomMessageBoxIcons.Info).Show();
+            MessageBox.MessageBoxIcons.Info);
 
 
     /// <summary>
@@ -54,16 +54,16 @@ public partial class EncryptTab
         // Check if a file has been chosen
         if (_filePath == "")
         {
-            new CustomMessageBox("Oops...", "You must choose a file to encrypt!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must choose a file to encrypt!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
         // Check if the encrypted file already exists
         if (File.Exists(_filePath + ".unikeys"))
         {
-            new CustomMessageBox("Oops...", "The file you want to encrypt already exists!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "The file you want to encrypt already exists!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
@@ -83,8 +83,8 @@ public partial class EncryptTab
         // Abort if the user didn't choose a file and show a warning message
         if (dialog.FileName == "")
         {
-            new CustomMessageBox("Oops...", "You must choose a file to save the encrypted file!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must choose a file to save the encrypted file!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
@@ -97,9 +97,9 @@ public partial class EncryptTab
         }
         catch (Exception exception)
         {
-            new CustomMessageBox(
-                "Oops...", "Something went wrong during encryption", CustomMessageBox.CustomMessageBoxIcons.Error,
-                exception).Show();
+            MessageBox.Show(
+                "Oops...", "Something went wrong during encryption", MessageBox.MessageBoxIcons.Error,
+                exception: exception);
             return;
         }
         finally
@@ -111,8 +111,8 @@ public partial class EncryptTab
         if (PasswordInputBox.Password != key)
             new UniqueKeyDisplayWindow(key).Show();
         else
-            new CustomMessageBox("Success!", "The file has been encrypted successfully!",
-                CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+            MessageBox.Show("Success!", "The file has been encrypted successfully!",
+                MessageBox.MessageBoxIcons.Success);
 
         // Clear the text boxes
         FilePathTextBox.Text = "";

@@ -38,8 +38,8 @@ public partial class ShredTab
     {
         if (FileListView.Items.Count == 0)
         {
-            new CustomMessageBox("Oops...", "You must choose at least one file to shred!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must choose at least one file to shred!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
@@ -61,8 +61,8 @@ public partial class ShredTab
         }
         catch (Exception exception)
         {
-            new CustomMessageBox("Oops...", "Something went wrong while shredding the files!",
-                CustomMessageBox.CustomMessageBoxIcons.Error, exception).Show();
+            MessageBox.Show("Oops...", "Something went wrong while shredding the files!",
+                MessageBox.MessageBoxIcons.Error, exception: exception);
             return;
         }
         finally
@@ -70,8 +70,8 @@ public partial class ShredTab
             LockShredGui(false);
         }
 
-        new CustomMessageBox("Success!", "Files shredded successfully!",
-            CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+        MessageBox.Show("Success!", "Files shredded successfully!",
+            MessageBox.MessageBoxIcons.Success);
 
         FileListView.ItemsSource = null;
     }

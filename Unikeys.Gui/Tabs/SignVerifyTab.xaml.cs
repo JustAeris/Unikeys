@@ -66,8 +66,8 @@ public partial class SignVerifyTab
         var cert = X509Helper.GenerateX509Certificate("Unikeys");
         X509Helper.WriteX509Certificate(cert, dialog.FileName);
 
-        new CustomMessageBox("Success!", "Certificate created successfully!",
-            CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+        MessageBox.Show("Success!", "Certificate created successfully!",
+            MessageBox.MessageBoxIcons.Success);
     }
 
     /// <summary>
@@ -97,16 +97,16 @@ public partial class SignVerifyTab
         // Check if a file is specified
         if (_fileToSignPath == "")
         {
-            new CustomMessageBox("Oops...", "You must specify a file to sign!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must specify a file to sign!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
         // Check if a certificate is specified
         if (CertificateListComboBox.SelectedItem == null)
         {
-            new CustomMessageBox("Oops...", "You must specify a certificate to sign with!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must specify a certificate to sign with!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
@@ -119,13 +119,13 @@ public partial class SignVerifyTab
         }
         catch (Exception exception)
         {
-            new CustomMessageBox("Oops...", "Something went wrong while signing the file!",
-                CustomMessageBox.CustomMessageBoxIcons.Error, exception).Show();
+            MessageBox.Show("Oops...", "Something went wrong while signing the file!",
+                MessageBox.MessageBoxIcons.Error, exception: exception);
             return;
         }
 
-        new CustomMessageBox("Success!", "Created a signature successfully!",
-            CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+        MessageBox.Show("Success!", "Created a signature successfully!",
+            MessageBox.MessageBoxIcons.Success);
 
         // Clear the text boxes
         FilePathSignTextBox.Text = "";
@@ -179,16 +179,16 @@ public partial class SignVerifyTab
         // Check if a file is specified
         if (_fileToVerifyPath == "")
         {
-            new CustomMessageBox("Oops...", "You must specify a file to verify!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must specify a file to verify!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
         // Check if a signature is specified
         if (_signatureFile == null)
         {
-            new CustomMessageBox("Oops...", "You must specify a signature to verify!",
-                CustomMessageBox.CustomMessageBoxIcons.Warning).Show();
+            MessageBox.Show("Oops...", "You must specify a signature to verify!",
+                MessageBox.MessageBoxIcons.Warning);
             return;
         }
 
@@ -201,21 +201,21 @@ public partial class SignVerifyTab
         }
         catch (Exception exception)
         {
-            new CustomMessageBox("Oops...", "Something went wrong while verifying the file!",
-                CustomMessageBox.CustomMessageBoxIcons.Error, exception).Show();
+            MessageBox.Show("Oops...", "Something went wrong while verifying the file!",
+                MessageBox.MessageBoxIcons.Error, exception: exception);
             return;
         }
 
         if (isValid)
         {
-            new CustomMessageBox("Success!", "Signature is valid! The file has not been modified.",
-                CustomMessageBox.CustomMessageBoxIcons.Success).Show();
+            MessageBox.Show("Success!", "Signature is valid! The file has not been modified.",
+                MessageBox.MessageBoxIcons.Success);
             FilePathVerifyTextBox.Text = "";
             SignaturePathVerifyTextBox.Text = "";
         }
         else
-            new CustomMessageBox("Oops...", "Signature is invalid! Either the file or the signature has been modified.",
-                CustomMessageBox.CustomMessageBoxIcons.Error).Show();
+            MessageBox.Show("Oops...", "Signature is invalid! Either the file or the signature has been modified.",
+                MessageBox.MessageBoxIcons.Error);
 
         // Clear the text boxes
         FilePathVerifyTextBox.Text = "";
