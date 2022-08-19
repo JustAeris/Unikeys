@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Unikeys.Gui;
@@ -37,4 +40,6 @@ public partial class ConfirmShredWindow
         Confirmed = true;
         Close();
     }
+
+    private void OpenEula(object sender, RoutedEventArgs e) => Process.Start("explorer.exe", Path.Combine(Environment.CurrentDirectory, "Tools"));
 }

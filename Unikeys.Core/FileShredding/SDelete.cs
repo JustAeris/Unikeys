@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace Unikeys.Core.FileShredding;
 
@@ -18,6 +19,17 @@ public static class SDelete
             RedirectStandardOutput = true
         }
     };
+
+    static SDelete()
+    {
+        var acceptedEula = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Sysinternals\SDelete", "EulaAccepted", 0) ?? 0);
+
+        if (acceptedEula != 0) return;
+
+        SDeleteProcess.StartInfo.Arguments = "/accepteula";
+        SDeleteProcess.Start();
+        SDeleteProcess.WaitForExit();
+    }
 
     /// <summary>
     /// Securely deletes a file using SDelete

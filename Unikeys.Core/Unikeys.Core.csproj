@@ -20,6 +20,10 @@
       <None Include="..\Unikeys.snk">
         <Link>Unikeys.snk</Link>
       </None>
+      <None Remove="Tools\Eula.txt" />
+      <Content Include="Tools\EULA.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
