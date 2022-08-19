@@ -26,9 +26,7 @@
 
     <ItemGroup>
         <None Remove="Icons\unikeys-logo.png" />
-        <Content Include="Icons\unikeys-logo.png">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
+        <Resource Include="Icons\unikeys-logo.png" />
         <None Include="..\Unikeys.snk">
           <Link>Unikeys.snk</Link>
         </None>
