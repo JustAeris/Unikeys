@@ -7,8 +7,6 @@ namespace Unikeys.Core.FileEncryption;
 /// <summary>
 /// This class will be used for retro-compatibility with old versions of the application.
 /// </summary>
-[Obsolete("This class is only used for retro-compatibility with old versions of the application. " +
-          "For new use cases, please use the standard EncryptionDecryption class.")]
 internal static class LegacyEncryptionDecryption
 {
     /// <summary>
@@ -19,6 +17,7 @@ internal static class LegacyEncryptionDecryption
     /// <param name="password">Password used for encryption</param>
     /// <param name="version">Version number, to allow the use of the correct method</param>
     /// <exception cref="ArgumentOutOfRangeException">Version does not exist</exception>
+#pragma warning disable CS0618
     public static void DecryptFile(string filePath, string destination, string password, int version)
     {
         switch (version)
@@ -33,6 +32,7 @@ internal static class LegacyEncryptionDecryption
                 throw new ArgumentOutOfRangeException(nameof(version), version, "Invalid version number");
         }
     }
+#pragma warning restore CS0618
 
     #region Version 1
 
@@ -44,6 +44,7 @@ internal static class LegacyEncryptionDecryption
     /// <param name="password">Optional, program will return a strong key if left empty</param>
     /// <exception cref="FileNotFoundException">Specified file does not exist</exception>
     /// <returns>Used password</returns>
+    [Obsolete("This method is deprecated, please use the new version")]
     private static string EncryptFileV1(string filePath, string destination, string password = "")
     {
         var key = string.IsNullOrEmpty(password) ? RandomNumberGenerator.GetBytes(32) : Encoding.UTF8.GetBytes(password);
@@ -78,6 +79,7 @@ internal static class LegacyEncryptionDecryption
     /// <param name="destination">Destination file. Warning, it will overwrite any file with the same name</param>
     /// <param name="password">Plain text password</param>
     /// <exception cref="FileNotFoundException"></exception>
+    [Obsolete("This method is deprecated, please use the new version")]
     private static void DecryptFileV1(string filePath, string destination, string password)
     {
         var tryBase64 = Array.Empty<byte>();
@@ -130,6 +132,7 @@ internal static class LegacyEncryptionDecryption
     /// <param name="password">Password to use, if left empty, will generate a strong unique key</param>
     /// <exception cref="FileNotFoundException">Specified file does not exist</exception>
     /// <returns>Used password, if left empty, will be the generated key</returns>
+    [Obsolete("This method is deprecated, please use the new version")]
     private static string EncryptFileV0(string filePath, string destination, string password = "")
     {
         var key = string.IsNullOrEmpty(password) ? RandomNumberGenerator.GetBytes(32) : Encoding.UTF8.GetBytes(password);
@@ -152,6 +155,7 @@ internal static class LegacyEncryptionDecryption
     /// <param name="bytes">Data to encrypt</param>
     /// <param name="password">Key to use</param>
     /// <returns>Encrypted data with the IV as the last 16 bytes</returns>
+    [Obsolete("This method is deprecated, please use the new version")]
     private static byte[] Encrypt(byte[] bytes, byte[] password)
     {
         if (bytes.Length == 0)
@@ -179,6 +183,7 @@ internal static class LegacyEncryptionDecryption
     /// <param name="destination"></param>
     /// <param name="password"></param>
     /// <exception cref="FileNotFoundException">Specified file does not exist</exception>
+    [Obsolete("This method is deprecated, please use the new version")]
     private static void DecryptFileV0(string filePath, string destination, string password)
     {
         var tryBase64 = Array.Empty<byte>();
@@ -211,6 +216,7 @@ internal static class LegacyEncryptionDecryption
     /// <param name="password">Key to use</param>
     /// <exception cref="ArgumentException">Bytes array must be at least 16 bytes to be decrypted</exception>
     /// <returns>Returns the raw decrypted data</returns>
+    [Obsolete("This method is deprecated, please use the new version")]
     private static byte[] Decrypt(byte[] bytes, byte[] password)
     {
         if (bytes.Length < 16)
