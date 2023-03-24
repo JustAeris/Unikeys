@@ -37,7 +37,6 @@ public static class EncryptionDecryption
         // Compute HMAC-SHA512
         var hmacKey = SHA512.Create().ComputeHash(aes.Key);
         var hmac = new HMACSHA512(hmacKey);
-        var a = hmac.InputBlockSize;
         hmac.TransformBlock(aes.IV, 0, aes.IV.Length, null, 0);
         var buffer = new byte[4096];
         // Transform the rest of the stream with the HMAC
