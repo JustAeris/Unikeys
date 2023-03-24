@@ -96,7 +96,7 @@ public static class EncryptionDecryption
         if (versionBytes[0] != VersioningNumber[0])
         {
             stream.Dispose();
-            LegacyEncryptionDecryption.DecryptFile(filePath, destination, password);
+            LegacyEncryptionDecryption.DecryptFile(filePath, destination, password, versionBytes[0]);
             return;
         }
 
