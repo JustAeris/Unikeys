@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
@@ -94,6 +95,15 @@ public partial class DecryptTab
         try
         {
             await Task.Run(() => EncryptionDecryption.DecryptFile(_filePath, dialog.FileName, PasswordInputBox.Password));
+        }
+        catch (CryptographicException ex)
+        {
+            if (ex.Message == "HMAC verification failed, file may have been tampered with")
+                MessageBox.Show("Oops...", "Data integrity verification failed, file may have been tampered with!",
+                    MessageBox.MessageBoxIcons.Warning);
+            else
+                MessageBox.Show("Oops...", "Something went wrong while decrypting the file! Maybe a wrong password?",
+                    MessageBox.MessageBoxIcons.Error, exception: ex);
         }
         catch (Exception ex)
         {
