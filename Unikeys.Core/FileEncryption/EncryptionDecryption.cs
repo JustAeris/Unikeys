@@ -8,7 +8,7 @@ namespace Unikeys.Core.FileEncryption;
 /// </summary>
 public static class EncryptionDecryption
 {
-    private static readonly byte[] VersioningNumber = { Convert.ToByte(1) };
+    private static readonly byte[] VersioningNumber = { Convert.ToByte(2) };
 
     /// <summary>
     /// Encrypt a file using AES-256-CBC. Supports any size. Includes a HMAC-SHA512 to ensure integrity.
