@@ -85,6 +85,20 @@
                 <uc:SignVerifyTab/>
             </TabItem>
 
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <svgc:SvgViewbox Height="20" Source="{DynamicResource FileCodeIcon}"/>
+                        <Label Margin="5,0,0,0" FontFamily="{StaticResource RobotoMono}">
+                            Self-EXE
+                        </Label>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <uc:SelfExeTab/>
+            </TabItem>
+
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
