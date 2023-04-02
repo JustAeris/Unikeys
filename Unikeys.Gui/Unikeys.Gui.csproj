@@ -11,7 +11,11 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\Unikeys.snk</AssemblyOriginatorKeyFile>
         <Deterministic>false</Deterministic>
-        <LangVersion>11</LangVersion>
+        <LangVersion>latestmajor</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
