@@ -68,14 +68,15 @@ public static class EncryptionDecryption
 
     /// <summary>
     /// Decrypt a file using AES-256-CBC. Supports any size. Includes a HMAC-SHA512 verification to ensure integrity.<br/>
-    /// This overload <b>does NOT support</b> legacy decryption. For legacy decryption, use <see cref="DecryptFile(string, string, string)"/>.
+    /// This overload <b>does NOT support</b> legacy decryption. For legacy decryption, use <see cref="DecryptFile(string, string, string, bool)"/>.
     /// </summary>
     /// <param name="stream"><see cref="FileStream"/> to decrypt</param>
     /// <param name="destination">Destination file. Warning, it will overwrite any file with the same name</param>
     /// <param name="password">Plain text password</param>
+    /// <param name="overwrite">If true, will force the overwrite of the destination file</param>
     /// <exception cref="FileNotFoundException">File to decrypt does not exist</exception>
     /// <exception cref="CryptographicException">The HMAC verification/calculation has failed</exception>
-    public static void DecryptFile(FileStream stream, string destination, string password)
+    public static void DecryptFile(FileStream stream, string destination, string password, bool overwrite = true)
     {
         var tryBase64 = Array.Empty<byte>();
         try
@@ -107,10 +108,19 @@ public static class EncryptionDecryption
 
         using var encryptor = aes.CreateDecryptor(aes.Key, iv);
 
-        using var encryptedStream = new CryptoStream(stream, encryptor, CryptoStreamMode.Read);
-        using var fileStream = File.Create(destination);
+        var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+        using var fileStream = File.Create(tempFile);
 
-        encryptedStream.CopyTo(fileStream);
+        try
+        {
+            using var encryptedStream = new CryptoStream(stream, encryptor, CryptoStreamMode.Read);
+            encryptedStream.CopyTo(fileStream);
+        }
+        catch
+        {
+            File.Delete(tempFile);
+            throw;
+        }
 
         // Compute HMAC-SHA512
         var hmacKey = SHA512.Create().ComputeHash(aes.Key);
@@ -124,22 +134,32 @@ public static class EncryptionDecryption
         hmac.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
 
         if (hmac.Hash is not { Length: 64 })
+        {
+            File.Delete(tempFile);
             throw new CryptographicException("HMAC calculation failed");
+        }
 
         if (!hmac.Hash.SequenceEqual(hmacBytes))
+        {
+            File.Delete(tempFile);
             throw new CryptographicException("HMAC verification failed, file may have been tampered with");
+        }
+
+        fileStream.Close();
+        File.Move(tempFile, destination, overwrite);
     }
 
     /// <summary>
-    /// Decrypt a file using AES-256-CBC. Supports any size. Includes a HMAC-SHA512 verification to ensure integrity.
-    /// Supports legacy decryption.
+    /// Decrypt a file using AES-256-CBC. Supports any size. Includes a HMAC-SHA512 verification to ensure integrity.<br/>
+    /// <b>Supports legacy decryption.</b>
     /// </summary>
     /// <param name="filePath">File to decrypt</param>
     /// <param name="destination">Destination file. Warning, it will overwrite any file with the same name</param>
     /// <param name="password">Plain text password</param>
+    /// <param name="overwrite">If true, will force the overwrite of the destination file</param>
     /// <exception cref="FileNotFoundException">File to decrypt does not exist</exception>
     /// <exception cref="CryptographicException">The HMAC verification/calculation has failed</exception>
-    public static void DecryptFile(string filePath, string destination, string password)
+    public static void DecryptFile(string filePath, string destination, string password, bool overwrite = true)
     {
         if (!File.Exists(filePath))
             throw new FileNotFoundException("File to decrypt does not exist", filePath);
@@ -157,6 +177,6 @@ public static class EncryptionDecryption
             return;
         }
         stream.Seek(0, SeekOrigin.Begin);
-        DecryptFile(stream, destination, password);
+        DecryptFile(stream, destination, password, overwrite);
     }
 }
