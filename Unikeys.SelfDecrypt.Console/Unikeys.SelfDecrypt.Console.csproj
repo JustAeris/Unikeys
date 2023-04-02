@@ -5,10 +5,31 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <ApplicationIcon>..\Unikeys.Gui\Icons\unikeys-logo.ico</ApplicationIcon>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\Unikeys.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <DebugType>embedded</DebugType>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Spectre.Console" Version="0.46.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Unikeys.SelfDecrypt.Core\Unikeys.SelfDecrypt.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\Unikeys.Gui\Icons\unikeys-logo.ico">
+        <Link>unikeys-logo.ico</Link>
+      </None>
+      <None Include="..\Unikeys.snk">
+        <Link>Unikeys.snk</Link>
+      </None>
+    </ItemGroup>
 
 </Project>
