@@ -62,26 +62,42 @@ public static class SFX
         #endregion
         "Cpwn3IP4danGr07iaWAUwoPWLEwu1lSZCicBMWAUZjITAh4RBHn4lig9f98aNw==";
 
-    private const string SFXFileName = "Unikeys.SelfDecrypt.Console.exe";
-
     private static IEnumerable<byte> GetMarkerBytes() => Convert.FromBase64String(Marker);
+
+    public enum OS
+    {
+        Windows,
+        Linux,
+        MacOS
+    }
 
     static SFX()
     {
-        if (!File.Exists(SFXFileName))
-            throw new FileNotFoundException("SFX module not found");
+        if (!File.Exists(Configuration.Options.SFXPaths.Win64) ||
+            !File.Exists(Configuration.Options.SFXPaths.Lin64) ||
+            !File.Exists(Configuration.Options.SFXPaths.Osx64))
+            throw new Exception("SFX paths are not set");
     }
 
     /// <summary>
     /// Creates a self-decryptable file
     /// </summary>
     /// <param name="sourceFile">Source file</param>
+    /// <param name="os">Target OS</param>
     /// <param name="password">Password for encryption</param>
     /// <returns>Strong key, if password was empty</returns>
-    public static string Encrypt(string sourceFile, string password = "")
+    public static string Encrypt(string sourceFile, OS os = OS.Windows, string password = "")
     {
+        var sfx = os switch
+        {
+            OS.Windows => Configuration.Options.SFXPaths.Win64,
+            OS.Linux => Configuration.Options.SFXPaths.Lin64,
+            OS.MacOS => Configuration.Options.SFXPaths.Osx64,
+            _ => throw new ArgumentOutOfRangeException(nameof(os), os, null)
+        };
+
         var destFile = new FileInfo(sourceFile).Name + ".exe";
-        File.Copy(new FileInfo(SFXFileName).FullName, destFile, true);
+        File.Copy(new FileInfo(sfx).FullName, destFile, true);
 
         // Append marker
         var stream = new FileStream(destFile, FileMode.Append, FileAccess.Write);
@@ -96,9 +112,18 @@ public static class SFX
     /// </summary>
     /// <param name="sourceFile">Source file to modify</param>
     /// <param name="destFile">Destination file path</param>
-    public static void MakeSFX(string sourceFile, string destFile)
+    /// <param name="os">Target OS</param>
+    public static void MakeSFX(string sourceFile, string destFile, OS os = OS.Windows)
     {
-        File.Copy(new FileInfo(SFXFileName).FullName, destFile, true);
+        var sfx = os switch
+        {
+            OS.Windows => Configuration.Options.SFXPaths.Win64,
+            OS.Linux => Configuration.Options.SFXPaths.Lin64,
+            OS.MacOS => Configuration.Options.SFXPaths.Osx64,
+            _ => throw new ArgumentOutOfRangeException(nameof(os), os, null)
+        };
+
+        File.Copy(new FileInfo(sfx).FullName, destFile, true);
 
         // Append marker
         using var stream = new FileStream(destFile, FileMode.Append, FileAccess.Write);
