@@ -72,7 +72,7 @@ public partial class SelfExeTab
             LockSFXGui(false);
         }
 
-        MessageBox.Show("Success!", "The file was successfully made into a SFX!");
+        MessageBox.Show("Success!", "The file was successfully made into a SFX!", MessageBox.MessageBoxIcons.Success);
     }
 
     private void LockSFXGui(bool locked)
