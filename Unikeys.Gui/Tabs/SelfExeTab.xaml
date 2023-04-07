@@ -21,9 +21,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Grid.Column="1">
@@ -49,9 +49,17 @@
             Grid.Column="1"
             IsReadOnly="True"/>
 
+        <Label Grid.Row="5" Grid.Column="1">Select target OS</Label>
+        <ComboBox
+            x:Name="TargetOSComboBox"
+            Grid.Row="6"
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Stretch"/>
+
         <Button
             x:Name="MakeSFXButton"
-            Grid.Row="5"
+            Grid.Row="7"
             Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Center"
@@ -73,15 +81,5 @@
                     Visibility="Collapsed"/>
             </Grid>
         </Button>
-
-        <Separator Grid.Row="6" Grid.Column="1"/>
-
-        <TextBlock
-            Grid.Row="7"
-            Grid.Column="1"
-            TextAlignment="Justify"
-            TextWrapping="Wrap">
-            This option allows to make a self-executable file (SFX) from any Unikeys file. This is will allow anyone to decrypt the file on their computer even if they don't have the program installed.
-        </TextBlock>
     </Grid>
 </UserControl>

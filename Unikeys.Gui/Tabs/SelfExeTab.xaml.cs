@@ -15,6 +15,8 @@ public partial class SelfExeTab
     {
         InitializeComponent();
         _filePath = "";
+        TargetOSComboBox.ItemsSource = Enum.GetValues(typeof(SFX.OS));
+        TargetOSComboBox.SelectedIndex = 0;
     }
 
     /// <summary>
@@ -54,12 +56,14 @@ public partial class SelfExeTab
             return;
         }
 
+        var os = (SFX.OS)TargetOSComboBox.SelectedItem;
+
         LockSFXGui(true);
         try
         {
             await Task.Run(() => SFX.MakeSFX(_filePath,
                 Path.Combine(new FileInfo(_filePath).Directory?.FullName ?? string.Empty,
-                    new FileInfo(_filePath).Name + ".exe")));
+                    new FileInfo(_filePath).Name + ".exe"), os));
         }
         catch (Exception ex)
         {
