@@ -9,6 +9,7 @@
         <ApplicationIcon>..\Unikeys.Gui\Icons\unikeys-logo.ico</ApplicationIcon>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\Unikeys.snk</AssemblyOriginatorKeyFile>
+        <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
