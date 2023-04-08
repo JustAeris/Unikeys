@@ -16,10 +16,11 @@ public static class EncryptionDecryption
     /// <param name="filePath">File to encrypt</param>
     /// <param name="destination">Destination file. Warning, it will overwrite any file with the same name</param>
     /// <param name="password">Optional, program will return a strong key if left empty</param>
+    /// <param name="append">If true, will append the data to the destination file</param>
     /// <exception cref="FileNotFoundException">Specified file does not exist</exception>
     /// <exception cref="CryptographicException">The HMAC could not be calculated</exception>
     /// <returns>Used password, should only be used if the given password was empty</returns>
-    public static string EncryptFile(string filePath, string destination, string password = "")
+    public static string EncryptFile(string filePath, string destination, string password = "", bool append = false)
     {
         var key = string.IsNullOrEmpty(password) ? RandomNumberGenerator.GetBytes(32) : Encoding.UTF8.GetBytes(password);
 
@@ -51,7 +52,10 @@ public static class EncryptionDecryption
         using var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
         stream.Seek(0, SeekOrigin.Begin);
         using var encryptedStream = new CryptoStream(stream, encryptor, CryptoStreamMode.Read);
-        using var fileStream = File.Create(destination);
+
+        using var fileStream = append
+            ? File.Open(destination, FileMode.Append, FileAccess.Write)
+            : File.Create(destination);
 
         // Mark file as encrypted with versioning number to allow for retro-compatibility
         fileStream.Write(VersioningNumber, 0, 1);
@@ -63,14 +67,16 @@ public static class EncryptionDecryption
     }
 
     /// <summary>
-    /// Decrypt a file using AES-256-CBC. Supports any size. Includes a HMAC-SHA512 verification to ensure integrity.
+    /// Decrypt a file using AES-256-CBC. Supports any size. Includes a HMAC-SHA512 verification to ensure integrity.<br/>
+    /// This overload <b>does NOT support</b> legacy decryption. For legacy decryption, use <see cref="DecryptFile(string, string, string, bool)"/>.
     /// </summary>
-    /// <param name="filePath">File to decrypt</param>
+    /// <param name="stream"><see cref="FileStream"/> to decrypt</param>
     /// <param name="destination">Destination file. Warning, it will overwrite any file with the same name</param>
     /// <param name="password">Plain text password</param>
+    /// <param name="overwrite">If true, will force the overwrite of the destination file</param>
     /// <exception cref="FileNotFoundException">File to decrypt does not exist</exception>
     /// <exception cref="CryptographicException">The HMAC verification/calculation has failed</exception>
-    public static void DecryptFile(string filePath, string destination, string password)
+    public static void DecryptFile(FileStream stream, string destination, string password, bool overwrite = true)
     {
         var tryBase64 = Array.Empty<byte>();
         try
@@ -84,21 +90,8 @@ public static class EncryptionDecryption
 
         var key = tryBase64.Length == 32 ? tryBase64.ToArray() : Encoding.UTF8.GetBytes(password);
 
-        if (!File.Exists(filePath))
-            throw new FileNotFoundException("File not found", filePath);
-
-        using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-        // Get the version from the start of the stream
         var versionBytes = new byte[1];
         _ = stream.Read(versionBytes, 0, 1);
-
-        // If it's an old version, use legacy decryption
-        if (versionBytes[0] != VersioningNumber[0])
-        {
-            stream.Dispose();
-            LegacyEncryptionDecryption.DecryptFile(filePath, destination, password, versionBytes[0]);
-            return;
-        }
 
         // Get the IV from the start of the stream
         var iv = new byte[16];
@@ -115,10 +108,19 @@ public static class EncryptionDecryption
 
         using var encryptor = aes.CreateDecryptor(aes.Key, iv);
 
-        using var encryptedStream = new CryptoStream(stream, encryptor, CryptoStreamMode.Read);
-        using var fileStream = File.Create(destination);
+        var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+        using var fileStream = File.Create(tempFile);
 
-        encryptedStream.CopyTo(fileStream);
+        try
+        {
+            using var encryptedStream = new CryptoStream(stream, encryptor, CryptoStreamMode.Read);
+            encryptedStream.CopyTo(fileStream);
+        }
+        catch
+        {
+            File.Delete(tempFile);
+            throw;
+        }
 
         // Compute HMAC-SHA512
         var hmacKey = SHA512.Create().ComputeHash(aes.Key);
@@ -132,9 +134,49 @@ public static class EncryptionDecryption
         hmac.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
 
         if (hmac.Hash is not { Length: 64 })
+        {
+            File.Delete(tempFile);
             throw new CryptographicException("HMAC calculation failed");
+        }
 
         if (!hmac.Hash.SequenceEqual(hmacBytes))
+        {
+            File.Delete(tempFile);
             throw new CryptographicException("HMAC verification failed, file may have been tampered with");
+        }
+
+        fileStream.Close();
+        File.Move(tempFile, destination, overwrite);
+    }
+
+    /// <summary>
+    /// Decrypt a file using AES-256-CBC. Supports any size. Includes a HMAC-SHA512 verification to ensure integrity.<br/>
+    /// <b>Supports legacy decryption.</b>
+    /// </summary>
+    /// <param name="filePath">File to decrypt</param>
+    /// <param name="destination">Destination file. Warning, it will overwrite any file with the same name</param>
+    /// <param name="password">Plain text password</param>
+    /// <param name="overwrite">If true, will force the overwrite of the destination file</param>
+    /// <exception cref="FileNotFoundException">File to decrypt does not exist</exception>
+    /// <exception cref="CryptographicException">The HMAC verification/calculation has failed</exception>
+    public static void DecryptFile(string filePath, string destination, string password, bool overwrite = true)
+    {
+        if (!File.Exists(filePath))
+            throw new FileNotFoundException("File to decrypt does not exist", filePath);
+
+        using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+        // Get the version from the start of the stream
+        var versionBytes = new byte[1];
+        _ = stream.Read(versionBytes, 0, 1);
+
+        // If it's an old version, use legacy decryption
+        if (versionBytes[0] != VersioningNumber[0])
+        {
+            stream.Dispose();
+            LegacyEncryptionDecryption.DecryptFile(filePath, destination, password, versionBytes[0]);
+            return;
+        }
+        stream.Seek(0, SeekOrigin.Begin);
+        DecryptFile(stream, destination, password, overwrite);
     }
 }

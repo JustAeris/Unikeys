@@ -12,6 +12,8 @@ public static class Options
         var json = JObject.Parse(File.ReadAllText("appsettings.json"));
 
         Theme = (ThemeType)(int)(json[nameof(Theme)] ?? 0);
+
+        SFXPaths = json["SFXModules"]?.ToObject<SFXPaths>() ?? new SFXPaths();
     }
 
     private static void SaveOptions()
@@ -33,4 +35,6 @@ public static class Options
             SaveOptions();
         }
     }
+
+    public static SFXPaths SFXPaths { get; private set; }
 }

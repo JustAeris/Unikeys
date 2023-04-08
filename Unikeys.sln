@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikeys.Gui", "Unikeys.Gui\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikeys.Core", "Unikeys.Core\Unikeys.Core.csproj", "{7C63049C-3B65-4888-9843-CC3562313750}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unikeys.SelfDecrypt", "Unikeys.SelfDecrypt", "{252B01F4-EEFE-4120-A91C-F801E3B8D89C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikeys.SelfDecrypt.Core", "Unikeys.SelfDecrypt.Core\Unikeys.SelfDecrypt.Core.csproj", "{4DA3C090-2F74-45D0-BEC8-D25AF06212A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikeys.SelfDecrypt.Console", "Unikeys.SelfDecrypt.Console\Unikeys.SelfDecrypt.Console.csproj", "{70970BD1-BA35-4B0D-B4CD-7AB418025B38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,17 @@ Global
 		{7C63049C-3B65-4888-9843-CC3562313750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C63049C-3B65-4888-9843-CC3562313750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C63049C-3B65-4888-9843-CC3562313750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DA3C090-2F74-45D0-BEC8-D25AF06212A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA3C090-2F74-45D0-BEC8-D25AF06212A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA3C090-2F74-45D0-BEC8-D25AF06212A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DA3C090-2F74-45D0-BEC8-D25AF06212A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70970BD1-BA35-4B0D-B4CD-7AB418025B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70970BD1-BA35-4B0D-B4CD-7AB418025B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70970BD1-BA35-4B0D-B4CD-7AB418025B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70970BD1-BA35-4B0D-B4CD-7AB418025B38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4DA3C090-2F74-45D0-BEC8-D25AF06212A3} = {252B01F4-EEFE-4120-A91C-F801E3B8D89C}
+		{70970BD1-BA35-4B0D-B4CD-7AB418025B38} = {252B01F4-EEFE-4120-A91C-F801E3B8D89C}
 	EndGlobalSection
 EndGlobal

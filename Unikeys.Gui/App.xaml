@@ -18,6 +18,8 @@
                             <system:Uri x:Key="CircleCheckIcon">/Icons/Light/circle-check-black.svg</system:Uri>
                             <system:Uri x:Key="CopyIcon">/Icons/Light/copy-black.svg</system:Uri>
                             <system:Uri x:Key="FileCertificateIcon">/Icons/Light/file-certificate-black.svg</system:Uri>
+                            <system:Uri x:Key="FileCodeIcon">/Icons/Light/file-code-black.svg</system:Uri>
+                            <system:Uri x:Key="FileExportIcon">/Icons/Light/file-export-black.svg</system:Uri>
                             <system:Uri x:Key="FileSearchIcon">/Icons/Light/file-search-black.svg</system:Uri>
                             <system:Uri x:Key="FileShredderIcon">/Icons/Light/file-shredder-black.svg</system:Uri>
                             <system:Uri x:Key="HelpIcon">/Icons/Light/help-black.svg</system:Uri>
@@ -45,6 +47,8 @@
                             <system:Uri x:Key="CircleCheckIcon">/Icons/Dark/circle-check-white.svg</system:Uri>
                             <system:Uri x:Key="CopyIcon">/Icons/Dark/copy-white.svg</system:Uri>
                             <system:Uri x:Key="FileCertificateIcon">/Icons/Dark/file-certificate-white.svg</system:Uri>
+                            <system:Uri x:Key="FileCodeIcon">/Icons/Dark/file-code-white.svg</system:Uri>
+                            <system:Uri x:Key="FileExportIcon">/Icons/Dark/file-export-white.svg</system:Uri>
                             <system:Uri x:Key="FileSearchIcon">/Icons/Dark/file-search-white.svg</system:Uri>
                             <system:Uri x:Key="FileShredderIcon">/Icons/Dark/file-shredder-white.svg</system:Uri>
                             <system:Uri x:Key="HelpIcon">/Icons/Dark/help-white.svg</system:Uri>

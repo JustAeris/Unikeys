@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net6.0-windows</TargetFramework>
+        <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -11,6 +11,11 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\Unikeys.snk</AssemblyOriginatorKeyFile>
         <Deterministic>false</Deterministic>
+        <LangVersion>latestmajor</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>

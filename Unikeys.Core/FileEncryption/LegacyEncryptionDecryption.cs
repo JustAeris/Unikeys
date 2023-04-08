@@ -16,20 +16,17 @@ internal static class LegacyEncryptionDecryption
     /// <param name="destination">Destination's file path</param>
     /// <param name="password">Password used for encryption</param>
     /// <param name="version">Version number, to allow the use of the correct method</param>
-    /// <exception cref="ArgumentOutOfRangeException">Version does not exist</exception>
 #pragma warning disable CS0618
     public static void DecryptFile(string filePath, string destination, string password, int version)
     {
         switch (version)
         {
-            case 0:
-                DecryptFileV0(filePath, destination, password);
-                break;
             case 1:
                 DecryptFileV1(filePath, destination, password);
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(version), version, "Invalid version number");
+                DecryptFileV0(filePath, destination, password);
+                break;
         }
     }
 #pragma warning restore CS0618
