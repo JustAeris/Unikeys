@@ -97,7 +97,7 @@ public static class SFX
         };
 
         var destFile = new FileInfo(sourceFile).Name + ".exe";
-        File.Copy(new FileInfo(sfx).FullName, destFile, true);
+        File.Copy(new FileInfo(sfx ?? throw new InvalidOperationException("SFX module cannot be found")).FullName, destFile, true);
 
         // Append marker
         var stream = new FileStream(destFile, FileMode.Append, FileAccess.Write);
@@ -123,7 +123,7 @@ public static class SFX
             _ => throw new ArgumentOutOfRangeException(nameof(os), os, null)
         };
 
-        File.Copy(new FileInfo(sfx).FullName, destFile, true);
+        File.Copy(new FileInfo(sfx ?? throw new InvalidOperationException("SFX module cannot be found")).FullName, destFile, true);
 
         // Append marker
         using var stream = new FileStream(destFile, FileMode.Append, FileAccess.Write);
