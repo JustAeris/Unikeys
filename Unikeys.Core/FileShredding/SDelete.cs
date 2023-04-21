@@ -23,7 +23,7 @@ public class SDelete : IDisposable
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = Path.Combine(Environment.CurrentDirectory, $"{(Environment.Is64BitOperatingSystem ? "Tools/sdelete64.exe" : "Tools/sdelete.exe")}"),
+                FileName = Path.Combine(Environment.CurrentDirectory, $"{(Environment.Is64BitOperatingSystem ? $"Tools{Path.DirectorySeparatorChar}sdelete64.exe" : $"Tools{Path.DirectorySeparatorChar}sdelete.exe")}"),
                 UseShellExecute = runAsAdmin,
                 CreateNoWindow = true,
                 RedirectStandardOutput = !runAsAdmin,
@@ -50,6 +50,7 @@ public class SDelete : IDisposable
     public async Task DeleteFile(FileInfo file, int passes = 1)
     {
         SDeleteProcess.StartInfo.Arguments = $"-p {passes} -r \"{file.FullName}\"";
+        SDeleteProcess.Start();
         await SDeleteProcess.WaitForExitAsync();
 
         if (SDeleteProcess.StartInfo.RedirectStandardOutput)
@@ -98,6 +99,7 @@ public class SDelete : IDisposable
     public async Task DeleteDirectory(DirectoryInfo directory, int passes = 1)
     {
         SDeleteProcess.StartInfo.Arguments = $"-p {passes} -r \"{directory.FullName}\"";
+        SDeleteProcess.Start();
         await SDeleteProcess.WaitForExitAsync();
 
         if (SDeleteProcess.StartInfo.RedirectStandardOutput)
